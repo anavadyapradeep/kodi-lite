@@ -1,0 +1,26 @@
+﻿{
+    "$schema": "../schemas/Causal-Decision-Model.json",
+    "meta": {
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "Reference Empty Template",
+        "summary": "Baseline structural footprint for KODI Lite testing.",
+        "version": "1.0",
+        "draft": true,
+        "createdDate": "2026-06-17T00:00:00Z"
+    },
+    "diagrams": [
+        {
+            "meta": {
+                "uuid": "11111111-1111-1111-1111-111111111111",
+                "name": "Main Causal Flow Diagram",
+                "createdDate": "2026-06-17T00:00:00Z"
+            },
+            "elements": [],
+            "dependencies": []
+        }
+    ],
+    "runnableModels": [],
+    "inputOutputValues": [],
+    "evaluatableAssets": [],
+    "controls": []
+}

@@ -1,0 +1,9 @@
+﻿{
+  "cdd_id": "cdd_template_001",
+  "schema_version": "kimaru_cdd_v1",
+  "description": "Standardised Kimaru CDD template.",
+  "nodes": [],
+  "edges": [],
+  "kpis": [],
+  "metadata": {}
+}
