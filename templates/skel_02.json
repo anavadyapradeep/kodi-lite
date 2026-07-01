@@ -1,0 +1,815 @@
+{
+  "$schema": "../schemas/Causal-Decision-Model.json",
+  "meta": {
+    "uuid": "8e8a7b9b-dc3a-47a0-bb0a-7ed028370d46",
+    "name": "SKEL-02: Inventory & Stock Management",
+    "summary": "Canonical skeleton for inventory and stock management. Four Levers, four Externals, nine Intermediates, three Outcomes. 33 causal dependencies.",
+    "documentation": {
+      "content": "KODI Lite \u00b7 SKEL-02 \u00b7 Inventory & Stock Management\n\nLevers (4): Reorder Point, Safety Stock Buffer Target, Supplier Contract Terms, Warehouse Capacity Allocation\nExternals (4): Supplier Lead Time Volatility, Market Consumption Rate, Holding Capital Interest Rate, Perishability / Shelf-Life Constraint\nIntermediates (9): Procurement Lag Index [I1 = w1*E1 - w2*A3 + b], Demand Spike Velocity [I2 = (E2[t]-E2[t-1])/dt + b], Storage Space Utilisation [I3 = w1*A2 + w2*I5 - w3*A4 + b], Order Frequency Rate [I4 = w1*A1 + w2*I2 - w3*A3 + b], Cycle Stock [I5 = A3_qty/2 - w1*I2 + b], Available Stock Level [I6 = w1*A2 + w2*I5 - w3*E2 + b], Stockout Risk [I7 = w1*I1 + w2*I2 - w3*A2 + b], Inventory Shrinkage Rate [I8 = w1*A2 - w2*E4 + b], Inventory Turnover Velocity [I9 = w1*E2 - w2*A1 - w3*I8 + b]\nOutcomes (3): Service Level / Fill Rate [maximise], Total Carrying Costs [minimise], Deadstock Overhead [minimise]",
+      "MIMEType": "text/plain"
+    },
+    "version": "1.0",
+    "draft": false,
+    "createdDate": "2026-07-01T09:00:00Z"
+  },
+  "diagrams": [
+    {
+      "meta": {
+        "uuid": "3404f228-6271-47f7-a2e0-3d2282fa9d9d",
+        "name": "SKEL-02: Inventory & Stock Management \u2014 Causal Map"
+      },
+      "elements": [
+        {
+          "meta": {
+            "uuid": "1f5363d0-e9e1-4483-9232-70485c7706a1",
+            "name": "Reorder Point"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 60
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "e851641b-dafd-40d4-91e4-b4b1ea6bcc9e"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 5000,
+                  "step": 50,
+                  "value": 500,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "4a3a1d58-7113-453e-81f8-aaa261477881",
+            "name": "Safety Stock Buffer Target"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 180
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "7ce5da5c-9b88-453b-9773-16ddd0c85ab4"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 3000,
+                  "step": 50,
+                  "value": 300,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "5620bb0c-9945-4672-b5ea-6659dc1f5220",
+            "name": "Supplier Contract Terms"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 300
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "04d69c48-1b10-4d2a-8ae8-4cd4bef3374f"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 10000,
+                  "step": 100,
+                  "value": 1000,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "4e1299d9-11f2-4e78-8bb6-4ae103da2416",
+            "name": "Warehouse Capacity Allocation"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 420
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "5bbaf38d-ee71-4de4-b60b-b2507efcb61a"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 50000,
+                  "step": 500,
+                  "value": 10000,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "ba1f887a-c575-403e-8925-f6cf7d871852",
+            "name": "Supplier Lead Time Volatility"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 60
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "4c374ad0-28a9-4e72-8136-ebededd05d69"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 30,
+                  "step": 1,
+                  "value": 5,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "3ea4cb42-ba8f-45f6-81e1-7c93f7e1d76d",
+            "name": "Market Consumption Rate"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 180
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "70c8388d-8f3b-42f9-b1ed-1ff989ac9b22"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 10000,
+                  "step": 100,
+                  "value": 1500,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "10b88b10-2b5f-46b0-9c8b-a7cc73f46a82",
+            "name": "Holding Capital Interest Rate"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 300
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "d94a894e-9d45-4264-84c0-f2761a0501f3"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 25,
+                  "step": 0.5,
+                  "value": 8,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "18719330-66ca-45f6-b194-3f8d35c00e78",
+            "name": "Perishability / Shelf-Life Constraint"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 420
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "f3f7fd7e-6b27-4fe1-a52c-b81985714496"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 1,
+                  "max": 365,
+                  "step": 1,
+                  "value": 30,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "a915c291-f450-4aea-bebf-af6a16b6e2e9",
+            "name": "Procurement Lag Index"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 60
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "6ac6f554-54f1-4fe0-a5db-fca274ad4dee"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "f4c02dc4-6b3e-4491-9f89-3fa93f2c764b",
+            "name": "Demand Spike Velocity"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 180
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "38a536ff-cc67-48f2-9a83-a9b3f1f3c1ab"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "3246cc3d-6135-472d-b926-4c513acf7d64",
+            "name": "Storage Space Utilisation"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 300
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "be9e1129-7d19-4c0e-94d2-efa328fca67c"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "6ac28b24-a109-45c8-9096-d56a8a8ccfa7",
+            "name": "Order Frequency Rate"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 420
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "da1e0996-0b8e-41fd-aeec-ea2e594f4c0c"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "4b3b1f36-0b78-4859-bc5c-87205b274527",
+            "name": "Cycle Stock"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 540
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "9cac7613-3fe4-4f7b-b95a-cdd017437666"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "165393bd-b19f-4985-9b96-cd64a2100a95",
+            "name": "Available Stock Level"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 660
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "65945984-9ea9-4e6e-9398-3cb7f736f914"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "29e8563f-fb84-4238-9b4f-798fc759dbb6",
+            "name": "Stockout Risk"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 780
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "c39f4ca5-6387-40f9-9931-6cf3e7231e82"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "a15ef25c-a93a-4d5c-afdd-7642ad26b9b7",
+            "name": "Inventory Shrinkage Rate"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 900
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "7648e0c1-5f55-46f1-933a-9bf41d66d7ab"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "08d1f302-c5de-471b-ad02-536ebb0247ec",
+            "name": "Inventory Turnover Velocity"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 1020
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "afd0d6b7-7363-4ace-9da5-1c9e178cdeb2"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "87fb0917-92e2-4db8-b6c3-2eb884e65623",
+            "name": "Service Level / Fill Rate"
+          },
+          "causalType": "Outcome",
+          "position": {
+            "x": 960,
+            "y": 300
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "b0978879-5acd-4a64-9dd2-9a31b9f5a055"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "e4159a4c-081e-44a2-ae52-c96b88225d51",
+            "name": "Total Carrying Costs"
+          },
+          "causalType": "Outcome",
+          "position": {
+            "x": 960,
+            "y": 540
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "48ae1e4d-1f78-4e2a-9845-b32d79df4c45"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "57df9553-3d31-4314-82af-c008a475fd29",
+            "name": "Deadstock Overhead"
+          },
+          "causalType": "Outcome",
+          "position": {
+            "x": 960,
+            "y": 780
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "0d628f42-ec33-476d-a9d8-2f4e7008cfb8"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "meta": {
+            "uuid": "b9dfc5e2-842e-4902-a0b5-2e62335f0c00",
+            "name": "Higher ROP triggers orders more often \u2192 raises order frequency"
+          },
+          "source": "1f5363d0-e9e1-4483-9232-70485c7706a1",
+          "target": "6ac28b24-a109-45c8-9096-d56a8a8ccfa7"
+        },
+        {
+          "meta": {
+            "uuid": "ffd457c6-2831-4d2b-816e-84253171cbb5",
+            "name": "Higher ROP keeps more stock on hand \u2192 lowers turnover ratio"
+          },
+          "source": "1f5363d0-e9e1-4483-9232-70485c7706a1",
+          "target": "08d1f302-c5de-471b-ad02-536ebb0247ec"
+        },
+        {
+          "meta": {
+            "uuid": "34e5a95d-52f6-4a38-bcd2-cd8929b89552",
+            "name": "Larger safety stock buffer occupies more shelf space \u2192 raises utilisation"
+          },
+          "source": "4a3a1d58-7113-453e-81f8-aaa261477881",
+          "target": "3246cc3d-6135-472d-b926-4c513acf7d64"
+        },
+        {
+          "meta": {
+            "uuid": "b8ff2455-3b42-4810-98be-2ae10f4dcd90",
+            "name": "Safety stock adds directly to on-shelf available quantity"
+          },
+          "source": "4a3a1d58-7113-453e-81f8-aaa261477881",
+          "target": "165393bd-b19f-4985-9b96-cd64a2100a95"
+        },
+        {
+          "meta": {
+            "uuid": "cfef804e-1c89-4be1-bd42-8fe549f700c0",
+            "name": "Larger buffer absorbs more variance before stock hits zero \u2192 lowers risk"
+          },
+          "source": "4a3a1d58-7113-453e-81f8-aaa261477881",
+          "target": "29e8563f-fb84-4238-9b4f-798fc759dbb6"
+        },
+        {
+          "meta": {
+            "uuid": "44302545-3186-48c9-8e1e-b586beebc0f8",
+            "name": "Larger buffers increase dwell time \u2192 raises spoilage probability"
+          },
+          "source": "4a3a1d58-7113-453e-81f8-aaa261477881",
+          "target": "a15ef25c-a93a-4d5c-afdd-7642ad26b9b7"
+        },
+        {
+          "meta": {
+            "uuid": "45699eab-3f12-4ffd-85a9-2d23061953d5",
+            "name": "Stronger contract terms compress the effective procurement lag"
+          },
+          "source": "5620bb0c-9945-4672-b5ea-6659dc1f5220",
+          "target": "a915c291-f450-4aea-bebf-af6a16b6e2e9"
+        },
+        {
+          "meta": {
+            "uuid": "70f280e4-f8d8-4ea5-9aa3-d7c3f3bda937",
+            "name": "High MOQ forces fewer larger orders \u2192 compresses order frequency"
+          },
+          "source": "5620bb0c-9945-4672-b5ea-6659dc1f5220",
+          "target": "6ac28b24-a109-45c8-9096-d56a8a8ccfa7"
+        },
+        {
+          "meta": {
+            "uuid": "09605943-33b4-4218-97b9-51e357c899f6",
+            "name": "Larger MOQ means larger orders \u2192 average cycle stock = order_qty / 2"
+          },
+          "source": "5620bb0c-9945-4672-b5ea-6659dc1f5220",
+          "target": "4b3b1f36-0b78-4859-bc5c-87205b274527"
+        },
+        {
+          "meta": {
+            "uuid": "e838aeae-4639-4bef-a886-9bea25902d6e",
+            "name": "More capacity is the utilisation denominator \u2192 same stock yields lower %"
+          },
+          "source": "4e1299d9-11f2-4e78-8bb6-4ae103da2416",
+          "target": "3246cc3d-6135-472d-b926-4c513acf7d64"
+        },
+        {
+          "meta": {
+            "uuid": "18ea9dda-d5e0-48e4-9b4c-6a68bdbe2838",
+            "name": "Higher lead time volatility directly lengthens the effective lag"
+          },
+          "source": "ba1f887a-c575-403e-8925-f6cf7d871852",
+          "target": "a915c291-f450-4aea-bebf-af6a16b6e2e9"
+        },
+        {
+          "meta": {
+            "uuid": "2d8451fd-7ae5-4d60-bb36-e6aac5643d77",
+            "name": "Spike velocity is the time-derivative of E2 over consecutive periods"
+          },
+          "source": "3ea4cb42-ba8f-45f6-81e1-7c93f7e1d76d",
+          "target": "f4c02dc4-6b3e-4491-9f89-3fa93f2c764b"
+        },
+        {
+          "meta": {
+            "uuid": "0dbde1d6-2756-4310-ad25-8e0b94b0637d",
+            "name": "Faster consumption depletes cycle stock \u2192 reduces average holding level"
+          },
+          "source": "3ea4cb42-ba8f-45f6-81e1-7c93f7e1d76d",
+          "target": "4b3b1f36-0b78-4859-bc5c-87205b274527"
+        },
+        {
+          "meta": {
+            "uuid": "a42c0275-5d9c-4c9c-836e-053f37f0fc04",
+            "name": "Consumption drains available stock \u2192 primary depletion force"
+          },
+          "source": "3ea4cb42-ba8f-45f6-81e1-7c93f7e1d76d",
+          "target": "165393bd-b19f-4985-9b96-cd64a2100a95"
+        },
+        {
+          "meta": {
+            "uuid": "09f95d8a-85db-48b4-9c7c-1b17de3c1070",
+            "name": "Higher consumption is the turnover numerator \u2192 increases ratio"
+          },
+          "source": "3ea4cb42-ba8f-45f6-81e1-7c93f7e1d76d",
+          "target": "08d1f302-c5de-471b-ad02-536ebb0247ec"
+        },
+        {
+          "meta": {
+            "uuid": "07bb67d4-db9b-4350-91a5-8483920fb1ff",
+            "name": "Longer shelf life widens expiry window \u2192 less shrinkage at same stock"
+          },
+          "source": "18719330-66ca-45f6-b194-3f8d35c00e78",
+          "target": "a15ef25c-a93a-4d5c-afdd-7642ad26b9b7"
+        },
+        {
+          "meta": {
+            "uuid": "2e814faf-cb07-4f0f-ba7d-a84d67bbf7a2",
+            "name": "Longer lag means more exposure time for demand to deplete stock"
+          },
+          "source": "a915c291-f450-4aea-bebf-af6a16b6e2e9",
+          "target": "29e8563f-fb84-4238-9b4f-798fc759dbb6"
+        },
+        {
+          "meta": {
+            "uuid": "87ff8fd6-8aeb-4daf-af1b-590a7312bdda",
+            "name": "Demand spikes deplete stock faster \u2192 hits reorder point more often"
+          },
+          "source": "f4c02dc4-6b3e-4491-9f89-3fa93f2c764b",
+          "target": "6ac28b24-a109-45c8-9096-d56a8a8ccfa7"
+        },
+        {
+          "meta": {
+            "uuid": "4fae9812-8fb3-4554-be96-bb2df7787771",
+            "name": "Spikes consume cycle stock faster \u2192 average holding falls below A3/2"
+          },
+          "source": "f4c02dc4-6b3e-4491-9f89-3fa93f2c764b",
+          "target": "4b3b1f36-0b78-4859-bc5c-87205b274527"
+        },
+        {
+          "meta": {
+            "uuid": "70821b3e-af81-4a4e-be98-fa029983aa39",
+            "name": "Accelerating demand burns through safety stock faster than buffer allows"
+          },
+          "source": "f4c02dc4-6b3e-4491-9f89-3fa93f2c764b",
+          "target": "29e8563f-fb84-4238-9b4f-798fc759dbb6"
+        },
+        {
+          "meta": {
+            "uuid": "203e0d19-527d-4f61-b64f-824275ec3105",
+            "name": "Cycle stock occupies shelf space \u2192 largest contributor to utilisation"
+          },
+          "source": "4b3b1f36-0b78-4859-bc5c-87205b274527",
+          "target": "3246cc3d-6135-472d-b926-4c513acf7d64"
+        },
+        {
+          "meta": {
+            "uuid": "aadb415f-5eb7-44e1-93ea-3456bc51882d",
+            "name": "Cycle stock is the primary active component of on-shelf inventory"
+          },
+          "source": "4b3b1f36-0b78-4859-bc5c-87205b274527",
+          "target": "165393bd-b19f-4985-9b96-cd64a2100a95"
+        },
+        {
+          "meta": {
+            "uuid": "64101785-c610-4aff-9486-1dc576ac614c",
+            "name": "Shrinkage removes stock without a sale \u2192 inflates denominator, reduces ratio"
+          },
+          "source": "a15ef25c-a93a-4d5c-afdd-7642ad26b9b7",
+          "target": "08d1f302-c5de-471b-ad02-536ebb0247ec"
+        },
+        {
+          "meta": {
+            "uuid": "3c55f860-07ff-456d-9457-899820b172a5",
+            "name": "Safety stock held permanently attracts capital holding cost directly"
+          },
+          "source": "4a3a1d58-7113-453e-81f8-aaa261477881",
+          "target": "e4159a4c-081e-44a2-ae52-c96b88225d51"
+        },
+        {
+          "meta": {
+            "uuid": "9900a3bf-c35f-446e-aeb9-c00cba3fdbd9",
+            "name": "Interest rate multiplies total inventory value \u2192 computes capital cost"
+          },
+          "source": "10b88b10-2b5f-46b0-9c8b-a7cc73f46a82",
+          "target": "e4159a4c-081e-44a2-ae52-c96b88225d51"
+        },
+        {
+          "meta": {
+            "uuid": "2c9faafc-0a4e-49b7-bb01-d7358ee6b3b1",
+            "name": "Higher utilisation raises warehouse operating cost per unit stored"
+          },
+          "source": "3246cc3d-6135-472d-b926-4c513acf7d64",
+          "target": "e4159a4c-081e-44a2-ae52-c96b88225d51"
+        },
+        {
+          "meta": {
+            "uuid": "0de9c8d6-da1b-4fb1-a7af-c3cde225ed0d",
+            "name": "Each order incurs fixed transaction cost \u2192 higher frequency multiplies this"
+          },
+          "source": "6ac28b24-a109-45c8-9096-d56a8a8ccfa7",
+          "target": "e4159a4c-081e-44a2-ae52-c96b88225d51"
+        },
+        {
+          "meta": {
+            "uuid": "2c86f833-b730-445c-8ce0-85951496c40c",
+            "name": "Cycle stock is the dominant physical inventory holding cost component"
+          },
+          "source": "4b3b1f36-0b78-4859-bc5c-87205b274527",
+          "target": "e4159a4c-081e-44a2-ae52-c96b88225d51"
+        },
+        {
+          "meta": {
+            "uuid": "f38cc994-7a69-41d1-8708-025b868bceda",
+            "name": "Stock on the shelf determines whether an order can be immediately filled"
+          },
+          "source": "165393bd-b19f-4985-9b96-cd64a2100a95",
+          "target": "87fb0917-92e2-4db8-b6c3-2eb884e65623"
+        },
+        {
+          "meta": {
+            "uuid": "3035a6c9-7f57-48c9-ad42-21bc2ef9575c",
+            "name": "Higher stockout probability directly suppresses achievable fill rate"
+          },
+          "source": "29e8563f-fb84-4238-9b4f-798fc759dbb6",
+          "target": "87fb0917-92e2-4db8-b6c3-2eb884e65623"
+        },
+        {
+          "meta": {
+            "uuid": "418f7b7f-4144-4b85-ae20-9ed9446ee962",
+            "name": "Shrinkage is the direct measure of stock lost to spoilage \u2192 write-off driver"
+          },
+          "source": "a15ef25c-a93a-4d5c-afdd-7642ad26b9b7",
+          "target": "57df9553-3d31-4314-82af-c008a475fd29"
+        },
+        {
+          "meta": {
+            "uuid": "3480d3dc-4289-4024-b84d-c782d5d7c737",
+            "name": "Faster turnover signals efficient replenishment \u2192 secondary positive effect"
+          },
+          "source": "08d1f302-c5de-471b-ad02-536ebb0247ec",
+          "target": "87fb0917-92e2-4db8-b6c3-2eb884e65623"
+        },
+        {
+          "meta": {
+            "uuid": "14cd4eb7-01b3-4e94-8adb-9e73d1b641b0",
+            "name": "High turnover means stock sells before expiry \u2192 protective against deadstock"
+          },
+          "source": "08d1f302-c5de-471b-ad02-536ebb0247ec",
+          "target": "57df9553-3d31-4314-82af-c008a475fd29"
+        }
+      ]
+    }
+  ]
+}

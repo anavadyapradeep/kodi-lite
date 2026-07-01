@@ -1,0 +1,905 @@
+{
+  "$schema": "../schemas/Causal-Decision-Model.json",
+  "meta": {
+    "uuid": "a3ff4c05-eaf7-4891-92a1-ea9a5848c4f3",
+    "name": "SKEL-04: Demand Forecasting",
+    "summary": "Canonical skeleton for demand forecasting. Five Levers, six Externals, six Intermediates, four Outcomes. 40 causal dependencies.",
+    "documentation": {
+      "content": "KODI Lite \u00b7 SKEL-04 \u00b7 Demand Forecasting\n\nLevers (5): Forecast Horizon, Forecast Method, Segmentation Granularity, Consensus Adjustment Weight, Forecast Review Frequency\nExternals (6): Historical Sales Volume, Demand Seasonality Index, Market Price Index, Competitor Activity Index, Macroeconomic Indicator, Promotional Event Calendar\nIntermediates (6): Statistical Baseline Forecast [I1 = w1*E1 + w2*E2 - w3*E3 + w4*E5 + w5*E6 + w6*A2 - w7*A1 + b], Forecast Bias [I2 = w1*A4 - w2*A5 + w3*E4 + b], Demand Volatility [I3 = w1*E4 + w2*E3 + w3*E6 - w4*E1 + b], Consensus Forecast [I4 = w1*I1 + w2*A4 - w3*I2 + w4*A5 + b], Forecast Accuracy [I5 = -w1*I3 + w2*A2 + w3*A3 + w4*A5 - w5*I2 + b], Forecast Confidence Interval [I6 = w1*I3 - w2*I5 + w3*A1 + b]\nOutcomes (4): Demand Plan Quality [maximise], Inventory Implication [minimise], Revenue Forecast Confidence [maximise], Excess Stock Exposure [minimise]",
+      "MIMEType": "text/plain"
+    },
+    "version": "1.0",
+    "draft": false,
+    "createdDate": "2026-07-01T09:00:00Z"
+  },
+  "diagrams": [
+    {
+      "meta": {
+        "uuid": "f5a67dbf-8184-4f2f-b6f4-109e6309c9dc",
+        "name": "SKEL-04: Demand Forecasting \u2014 Causal Map"
+      },
+      "elements": [
+        {
+          "meta": {
+            "uuid": "467dda1b-dd05-464b-bb99-fa4a02b508af",
+            "name": "Forecast Horizon"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 60
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "5933b5f2-c1eb-4291-980f-656a079ad26d"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 1,
+                  "max": 52,
+                  "step": 1,
+                  "value": 12,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "1235fb68-8dc0-4f74-9f41-cd2de95f0251",
+            "name": "Forecast Method"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 180
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "c1422689-64b2-409e-92b4-aa607e3e317c"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 5,
+                  "value": 60,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "826be1aa-587c-445b-826d-7dd2db1b683b",
+            "name": "Segmentation Granularity"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 300
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "c8b9db7c-03e3-489d-9497-0908990c011c"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 5,
+                  "value": 50,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "abf5bb36-34a4-4504-b265-7e43560c6fcb",
+            "name": "Consensus Adjustment Weight"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 420
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "1bb251ab-e93d-4ca7-b65d-82043646a68e"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 5,
+                  "value": 30,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "469366fe-b4a3-4bdf-b6ce-c1f113b727fe",
+            "name": "Forecast Review Frequency"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 540
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "a5c11214-2320-4114-bbe4-1bcb4a1f4841"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 1,
+                  "max": 30,
+                  "step": 1,
+                  "value": 7,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "d95afc84-5fd8-473f-aeba-d32bfd39315e",
+            "name": "Historical Sales Volume"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 60
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "d1655fb6-cc3b-482d-89cd-c4aa8a15e861"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100000,
+                  "step": 500,
+                  "value": 15000,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "e5930810-8266-45ca-b2bb-860b8f07a417",
+            "name": "Demand Seasonality Index"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 180
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "6bb7788b-f048-4ac7-b4ef-90b6c71f45f5"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 3,
+                  "step": 0.1,
+                  "value": 1,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "0cd8b6c2-69a8-43ca-ac74-bec1603226d1",
+            "name": "Market Price Index"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 300
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "1a6fd06e-7613-4e40-b9f1-4521d175b9bd"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 200,
+                  "step": 1,
+                  "value": 100,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "62df5636-132d-499b-8a17-09ac11fd0bd8",
+            "name": "Competitor Activity Index"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 420
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "6053da5f-03ee-4076-b549-50e8b73f27e6"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "value": 40,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "f21666fd-c824-4948-8ff2-a0efb71a64d9",
+            "name": "Macroeconomic Indicator"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 540
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "33679ced-5b66-40ac-971c-5cc33880407d"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": -100,
+                  "max": 100,
+                  "step": 1,
+                  "value": 10,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "33a8a832-18ad-4cbb-9811-5237cd8bea55",
+            "name": "Promotional Event Calendar"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 660
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "0cead4f7-a333-4bd9-9459-0bf62e858e97"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 5,
+                  "value": 20,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "3b242c51-2a34-4fad-92d5-ddf67c021b34",
+            "name": "Statistical Baseline Forecast"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 120
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "2f65d262-f0e4-40dd-8b49-3f2583518dfc"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "479bb65d-972b-430d-bded-5c74d7555c20",
+            "name": "Forecast Bias"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 300
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "a0c0292d-e550-4736-88e7-77a382683fff"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "e8612376-363f-4f23-a925-1127ddcbc23f",
+            "name": "Demand Volatility"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 480
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "edc13c73-3911-4dd4-8554-7d5aaec7c506"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "05807d4f-fd06-44f1-b497-c8889fcc0cba",
+            "name": "Consensus Forecast"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 660
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "dd5a6892-ec54-4e66-a6d6-73816c691339"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "f38591e1-3764-4452-a0de-35d39ae1d9b6",
+            "name": "Forecast Accuracy"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 840
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "8eb0c952-64ea-4bad-8f02-af4c2b0d5321"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "70cce98d-d0a6-472f-a8b2-547613885f7c",
+            "name": "Forecast Confidence Interval"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 1020
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "854364be-b40f-4aaa-81fb-e527e9434956"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "cb230363-e11a-4461-ab52-136d5e1cc391",
+            "name": "Demand Plan Quality"
+          },
+          "causalType": "Outcome",
+          "position": {
+            "x": 960,
+            "y": 180
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "2cd0eda0-d6ee-46fa-9214-deb8fb767528"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "aa39ba2c-efbf-41e3-8871-28ee9e2f50ac",
+            "name": "Inventory Implication"
+          },
+          "causalType": "Outcome",
+          "position": {
+            "x": 960,
+            "y": 420
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "c21b5346-4040-469f-8907-4fe1fbd9c126"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "483044f7-a270-48b7-b2d3-73ce494a9ddf",
+            "name": "Revenue Forecast Confidence"
+          },
+          "causalType": "Outcome",
+          "position": {
+            "x": 960,
+            "y": 660
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "e1f2c647-3c19-4791-ac6d-43b13de0f288"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "3e4b5b71-1d28-4828-a979-0101637e6c1f",
+            "name": "Excess Stock Exposure"
+          },
+          "causalType": "Outcome",
+          "position": {
+            "x": 960,
+            "y": 900
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "df6b6e37-3ea2-446a-95be-e33ec1729e6e"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "meta": {
+            "uuid": "41ecc8cf-34d2-4a53-85fe-760962fa69dc",
+            "name": "Longer horizon reduces extrapolation quality \u2192 dampens baseline reliability"
+          },
+          "source": "467dda1b-dd05-464b-bb99-fa4a02b508af",
+          "target": "3b242c51-2a34-4fad-92d5-ddf67c021b34"
+        },
+        {
+          "meta": {
+            "uuid": "8c8fe7c8-f2d2-47cd-8769-bc7cfaf01f3d",
+            "name": "Longer horizons accumulate uncertainty \u2192 confidence interval widens"
+          },
+          "source": "467dda1b-dd05-464b-bb99-fa4a02b508af",
+          "target": "70cce98d-d0a6-472f-a8b2-547613885f7c"
+        },
+        {
+          "meta": {
+            "uuid": "7f7f5f7a-7aad-41f9-98ce-3a8bc6110629",
+            "name": "Chosen algorithm determines how history and signals are weighted \u2192 shapes baseline"
+          },
+          "source": "1235fb68-8dc0-4f74-9f41-cd2de95f0251",
+          "target": "3b242c51-2a34-4fad-92d5-ddf67c021b34"
+        },
+        {
+          "meta": {
+            "uuid": "d14261c1-8b8d-4eb7-b821-2d032814eac3",
+            "name": "More sophisticated methods better capture non-linear patterns \u2192 improves accuracy"
+          },
+          "source": "1235fb68-8dc0-4f74-9f41-cd2de95f0251",
+          "target": "f38591e1-3764-4452-a0de-35d39ae1d9b6"
+        },
+        {
+          "meta": {
+            "uuid": "22279988-3478-4796-89a8-f8e8c8f6e322",
+            "name": "Finer segmentation aligns forecast to actual demand patterns \u2192 improves accuracy"
+          },
+          "source": "826be1aa-587c-445b-826d-7dd2db1b683b",
+          "target": "f38591e1-3764-4452-a0de-35d39ae1d9b6"
+        },
+        {
+          "meta": {
+            "uuid": "036cd7b5-1dce-44f6-8352-dc96244f026f",
+            "name": "Higher consensus weight amplifies systematic human judgement bias"
+          },
+          "source": "abf5bb36-34a4-4504-b265-7e43560c6fcb",
+          "target": "479bb65d-972b-430d-bded-5c74d7555c20"
+        },
+        {
+          "meta": {
+            "uuid": "baa29c62-5ca9-48d9-8cff-c5d83b562c89",
+            "name": "Adjustment weight determines how much human intelligence shifts the baseline"
+          },
+          "source": "abf5bb36-34a4-4504-b265-7e43560c6fcb",
+          "target": "05807d4f-fd06-44f1-b497-c8889fcc0cba"
+        },
+        {
+          "meta": {
+            "uuid": "28427e63-6041-4a67-96f8-90d5db9964af",
+            "name": "More frequent reviews correct bias accumulation earlier \u2192 reduces directional error"
+          },
+          "source": "469366fe-b4a3-4bdf-b6ce-c1f113b727fe",
+          "target": "479bb65d-972b-430d-bded-5c74d7555c20"
+        },
+        {
+          "meta": {
+            "uuid": "0c5f9f6e-7eec-4d2d-9194-e42d493ced4d",
+            "name": "Higher review frequency incorporates newer demand signals \u2192 consensus stays current"
+          },
+          "source": "469366fe-b4a3-4bdf-b6ce-c1f113b727fe",
+          "target": "05807d4f-fd06-44f1-b497-c8889fcc0cba"
+        },
+        {
+          "meta": {
+            "uuid": "44dbd6f2-3c0b-4259-b6d3-cabd9897782f",
+            "name": "More frequent updates reduce lag between market changes \u2192 improves rolling accuracy"
+          },
+          "source": "469366fe-b4a3-4bdf-b6ce-c1f113b727fe",
+          "target": "f38591e1-3764-4452-a0de-35d39ae1d9b6"
+        },
+        {
+          "meta": {
+            "uuid": "dcd49126-1d83-4770-91c0-59cd294bc091",
+            "name": "Sales history is the primary input to all statistical methods \u2192 anchors baseline"
+          },
+          "source": "d95afc84-5fd8-473f-aeba-d32bfd39315e",
+          "target": "3b242c51-2a34-4fad-92d5-ddf67c021b34"
+        },
+        {
+          "meta": {
+            "uuid": "d0e582b6-8357-4bbf-a908-7cf77eecf8b5",
+            "name": "High variance in the sales series signals inherently volatile demand"
+          },
+          "source": "d95afc84-5fd8-473f-aeba-d32bfd39315e",
+          "target": "e8612376-363f-4f23-a925-1127ddcbc23f"
+        },
+        {
+          "meta": {
+            "uuid": "e080bc2b-9b12-49eb-93b4-8e1ad635fb4c",
+            "name": "Seasonality index multiplies trend component \u2192 peak/trough shifts baseline"
+          },
+          "source": "e5930810-8266-45ca-b2bb-860b8f07a417",
+          "target": "3b242c51-2a34-4fad-92d5-ddf67c021b34"
+        },
+        {
+          "meta": {
+            "uuid": "1e879726-2dd9-4bf7-bb34-eb2dceee3a10",
+            "name": "Price level affects demand volume through elasticity \u2192 shifts forecast baseline"
+          },
+          "source": "0cd8b6c2-69a8-43ca-ac74-bec1603226d1",
+          "target": "3b242c51-2a34-4fad-92d5-ddf67c021b34"
+        },
+        {
+          "meta": {
+            "uuid": "f07a69f9-c4de-4874-953c-1d1f5ebfd65d",
+            "name": "Price volatility creates demand volatility through elastic customer response"
+          },
+          "source": "0cd8b6c2-69a8-43ca-ac74-bec1603226d1",
+          "target": "e8612376-363f-4f23-a925-1127ddcbc23f"
+        },
+        {
+          "meta": {
+            "uuid": "cd52c92d-788f-4ce9-8ce1-2a89455705c0",
+            "name": "Unanticipated competitor moves skew demand in ways the model cannot capture"
+          },
+          "source": "62df5636-132d-499b-8a17-09ac11fd0bd8",
+          "target": "479bb65d-972b-430d-bded-5c74d7555c20"
+        },
+        {
+          "meta": {
+            "uuid": "50a6e88a-31cb-40d2-849d-98a188d627b7",
+            "name": "Competitor promotions and launches inflate observed demand variance"
+          },
+          "source": "62df5636-132d-499b-8a17-09ac11fd0bd8",
+          "target": "e8612376-363f-4f23-a925-1127ddcbc23f"
+        },
+        {
+          "meta": {
+            "uuid": "88170bb9-003d-4491-ad07-6ce1f1279bdf",
+            "name": "Macro conditions drive secular demand trends \u2192 positive indicator lifts baseline"
+          },
+          "source": "f21666fd-c824-4948-8ff2-a0efb71a64d9",
+          "target": "3b242c51-2a34-4fad-92d5-ddf67c021b34"
+        },
+        {
+          "meta": {
+            "uuid": "3c33881c-5ed2-46ef-bf23-14f0f31728bd",
+            "name": "Promotional events create predictable demand lifts \u2192 adjusts baseline upward"
+          },
+          "source": "33a8a832-18ad-4cbb-9811-5237cd8bea55",
+          "target": "3b242c51-2a34-4fad-92d5-ddf67c021b34"
+        },
+        {
+          "meta": {
+            "uuid": "ac76f04c-e798-4a34-9906-ae6e3539eb9a",
+            "name": "Promotional events create spikes that inflate historical variance"
+          },
+          "source": "33a8a832-18ad-4cbb-9811-5237cd8bea55",
+          "target": "e8612376-363f-4f23-a925-1127ddcbc23f"
+        },
+        {
+          "meta": {
+            "uuid": "600de26d-0c5c-4954-a4d1-8c7d9edfe58f",
+            "name": "Competitor actions reducing demand below forecast directly create excess stock"
+          },
+          "source": "62df5636-132d-499b-8a17-09ac11fd0bd8",
+          "target": "3e4b5b71-1d28-4828-a979-0101637e6c1f"
+        },
+        {
+          "meta": {
+            "uuid": "c4aca7ef-660c-4755-a4b0-39f70cd07096",
+            "name": "Statistical baseline anchors the consensus \u2192 human adjustments are applied to it"
+          },
+          "source": "3b242c51-2a34-4fad-92d5-ddf67c021b34",
+          "target": "05807d4f-fd06-44f1-b497-c8889fcc0cba"
+        },
+        {
+          "meta": {
+            "uuid": "721bb683-4486-4814-ba8e-b617176e8347",
+            "name": "Systematic bias shifts the consensus directionally away from true demand"
+          },
+          "source": "479bb65d-972b-430d-bded-5c74d7555c20",
+          "target": "05807d4f-fd06-44f1-b497-c8889fcc0cba"
+        },
+        {
+          "meta": {
+            "uuid": "36e68bc9-dcbe-450b-8e0a-ad68d4f46397",
+            "name": "Persistent bias is a structural accuracy loss degrading MAPE independently"
+          },
+          "source": "479bb65d-972b-430d-bded-5c74d7555c20",
+          "target": "f38591e1-3764-4452-a0de-35d39ae1d9b6"
+        },
+        {
+          "meta": {
+            "uuid": "8d51ff78-f758-44ea-a9a2-3e8d3b9fcf74",
+            "name": "Higher demand volatility reduces achievable accuracy ceiling for all methods"
+          },
+          "source": "e8612376-363f-4f23-a925-1127ddcbc23f",
+          "target": "f38591e1-3764-4452-a0de-35d39ae1d9b6"
+        },
+        {
+          "meta": {
+            "uuid": "9a91f555-4796-43d2-b435-c28f869e85ab",
+            "name": "More volatile demand produces wider uncertainty bands around any point estimate"
+          },
+          "source": "e8612376-363f-4f23-a925-1127ddcbc23f",
+          "target": "70cce98d-d0a6-472f-a8b2-547613885f7c"
+        },
+        {
+          "meta": {
+            "uuid": "1bd35e60-a21d-4dd9-a2f4-c498eb613cad",
+            "name": "Higher achieved accuracy narrows the confidence interval width"
+          },
+          "source": "f38591e1-3764-4452-a0de-35d39ae1d9b6",
+          "target": "70cce98d-d0a6-472f-a8b2-547613885f7c"
+        },
+        {
+          "meta": {
+            "uuid": "4af799fa-b24f-427a-a6dc-edf2623e164b",
+            "name": "Finer segmentation provides more actionable planning units \u2192 improves plan quality"
+          },
+          "source": "826be1aa-587c-445b-826d-7dd2db1b683b",
+          "target": "cb230363-e11a-4461-ab52-136d5e1cc391"
+        },
+        {
+          "meta": {
+            "uuid": "a8c94d0c-fb9c-491a-af0a-7b14c057df2f",
+            "name": "Accuracy is the dominant determinant of demand plan quality"
+          },
+          "source": "f38591e1-3764-4452-a0de-35d39ae1d9b6",
+          "target": "cb230363-e11a-4461-ab52-136d5e1cc391"
+        },
+        {
+          "meta": {
+            "uuid": "d4003feb-55bc-47dc-a096-60b16a72d0a5",
+            "name": "Systematic bias creates consistent over- or under-supply \u2192 degrades plan quality"
+          },
+          "source": "479bb65d-972b-430d-bded-5c74d7555c20",
+          "target": "cb230363-e11a-4461-ab52-136d5e1cc391"
+        },
+        {
+          "meta": {
+            "uuid": "c43640db-35f4-48ae-876f-beb668de58bd",
+            "name": "Wider confidence intervals mandate larger safety stock buffers in inventory model"
+          },
+          "source": "70cce98d-d0a6-472f-a8b2-547613885f7c",
+          "target": "aa39ba2c-efbf-41e3-8871-28ee9e2f50ac"
+        },
+        {
+          "meta": {
+            "uuid": "477c3601-b645-419e-8f77-87ba52fa37d5",
+            "name": "Absolute consensus level determines total inventory requirements"
+          },
+          "source": "05807d4f-fd06-44f1-b497-c8889fcc0cba",
+          "target": "aa39ba2c-efbf-41e3-8871-28ee9e2f50ac"
+        },
+        {
+          "meta": {
+            "uuid": "1510293d-622e-4672-8b7f-f84967efecf9",
+            "name": "Lower accuracy requires larger safety stock buffers to compensate for uncertainty"
+          },
+          "source": "f38591e1-3764-4452-a0de-35d39ae1d9b6",
+          "target": "aa39ba2c-efbf-41e3-8871-28ee9e2f50ac"
+        },
+        {
+          "meta": {
+            "uuid": "136c31bf-0e88-469d-8cd3-00f0402500b5",
+            "name": "Higher accuracy enables more reliable revenue projections \u2192 financial confidence"
+          },
+          "source": "f38591e1-3764-4452-a0de-35d39ae1d9b6",
+          "target": "483044f7-a270-48b7-b2d3-73ce494a9ddf"
+        },
+        {
+          "meta": {
+            "uuid": "7e8f2a2c-416a-4dfa-981a-e4569495e33f",
+            "name": "Consensus forecast is the volume basis of the revenue projection"
+          },
+          "source": "05807d4f-fd06-44f1-b497-c8889fcc0cba",
+          "target": "483044f7-a270-48b7-b2d3-73ce494a9ddf"
+        },
+        {
+          "meta": {
+            "uuid": "91546691-d6b5-4c4c-a37c-58c26f4c7175",
+            "name": "Wider confidence intervals translate to wider revenue ranges \u2192 reduces confidence"
+          },
+          "source": "70cce98d-d0a6-472f-a8b2-547613885f7c",
+          "target": "483044f7-a270-48b7-b2d3-73ce494a9ddf"
+        },
+        {
+          "meta": {
+            "uuid": "5109482f-105e-4bf2-b02e-323df342d3aa",
+            "name": "Systematic bias skews revenue projections consistently \u2192 destroys credibility"
+          },
+          "source": "479bb65d-972b-430d-bded-5c74d7555c20",
+          "target": "483044f7-a270-48b7-b2d3-73ce494a9ddf"
+        },
+        {
+          "meta": {
+            "uuid": "2ff002d2-2526-4102-990a-cfd2effd0440",
+            "name": "Upward bias systematically drives over-production \u2192 primary excess stock driver"
+          },
+          "source": "479bb65d-972b-430d-bded-5c74d7555c20",
+          "target": "3e4b5b71-1d28-4828-a979-0101637e6c1f"
+        },
+        {
+          "meta": {
+            "uuid": "cd578eb8-9f8e-458a-94c3-68cba6b8edd2",
+            "name": "Wider interval raises probability actual demand falls below forecast"
+          },
+          "source": "70cce98d-d0a6-472f-a8b2-547613885f7c",
+          "target": "3e4b5b71-1d28-4828-a979-0101637e6c1f"
+        },
+        {
+          "meta": {
+            "uuid": "61d94470-d6f0-4679-a598-04b1d340b45f",
+            "name": "Lower accuracy increases probability of large forecast errors \u2192 raises exposure"
+          },
+          "source": "f38591e1-3764-4452-a0de-35d39ae1d9b6",
+          "target": "3e4b5b71-1d28-4828-a979-0101637e6c1f"
+        }
+      ]
+    }
+  ]
+}

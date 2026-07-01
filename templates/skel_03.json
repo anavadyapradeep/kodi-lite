@@ -1,0 +1,890 @@
+{
+  "$schema": "../schemas/Causal-Decision-Model.json",
+  "meta": {
+    "uuid": "af68dfd2-c1fd-401c-a6c3-3faf87d6d9b6",
+    "name": "SKEL-03: Quality Management",
+    "summary": "Canonical skeleton for quality management. Six Levers, five Externals, seven Intermediates, four Outcomes. 35 causal dependencies.",
+    "documentation": {
+      "content": "KODI Lite \u00b7 SKEL-03 \u00b7 Quality Management\n\nLevers (6): Inspection Intensity, Acceptance Threshold, Sampling Plan, Rework Authorisation Policy, SPC Trigger Threshold, Corrective Action Speed\nExternals (5): Incoming Material Quality, Process Environment Conditions, Customer Specification Tolerance, Supplier Consistency, Regulatory Quality Standards\nIntermediates (7): Process Capability Index [I1 = w1*E5 - w2*E1 - w3*E2 - w4*E4 + w5*A5 + b], In-Process Defect Rate [I2 = -w1*I1 + w2*E1 + w3*E2 + w4*E3 + w5*A2 - w6*A5 + w7*I4 + w8*I7 + b], Inspection Throughput [I3 = -w1*A1 - w2*A3 + b], Rework Volume [I4 = w1*I2 + w2*A4 + b], Scrap Rate [I5 = w1*I2 + w2*A2 - w3*A4 + b], First-Pass Yield [I6 = -w1*I2 + w2*A1 + b], Corrective Action Lag [I7 = -w1*A6 + b]\nOutcomes (4): Product Conformance Rate [maximise], Quality Cost per Unit [minimise], Customer Return Rate [minimise], Warranty Liability [minimise]",
+      "MIMEType": "text/plain"
+    },
+    "version": "1.0",
+    "draft": false,
+    "createdDate": "2026-07-01T09:00:00Z"
+  },
+  "diagrams": [
+    {
+      "meta": {
+        "uuid": "2405e0f4-f8b2-4bc9-8611-4e6835ef6849",
+        "name": "SKEL-03: Quality Management \u2014 Causal Map"
+      },
+      "elements": [
+        {
+          "meta": {
+            "uuid": "897843ed-6c76-461c-bad1-09133ee154b1",
+            "name": "Inspection Intensity"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 60
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "325bc9d0-de2f-4187-ab65-aed43537ec71"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "value": 50,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "249aae1a-84ad-497c-afae-efa28244d8e5",
+            "name": "Acceptance Threshold"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 180
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "97d8a7b0-d814-4988-9dd4-ca579872288e"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "value": 70,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "87aa9c91-f9ea-4348-a77e-cac9d51e7e25",
+            "name": "Sampling Plan"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 300
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "236902a6-c6b8-493a-ad67-187555c472ee"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "value": 40,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "45364eef-6cca-4c45-991e-ab6e03035e43",
+            "name": "Rework Authorisation Policy"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 420
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "b39de715-d663-47a5-9ade-c20977ffd602"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 5,
+                  "value": 60,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "0d2af1c1-da3d-4cf3-8187-7a450bce4c5e",
+            "name": "SPC Trigger Threshold"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 540
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "f53b3f56-efce-42f6-8bea-fd869399b61e"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 1,
+                  "max": 6,
+                  "step": 0.5,
+                  "value": 3,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "6b3d7e53-b81d-412c-9d14-e0580d785484",
+            "name": "Corrective Action Speed"
+          },
+          "causalType": "Lever",
+          "position": {
+            "x": 80,
+            "y": 660
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "5d3e98bf-78bd-4ca6-a06f-3fc0d1ece3c1"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 1,
+                  "max": 72,
+                  "step": 1,
+                  "value": 8,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "5fdcee30-cb6b-413a-842a-578fadc10891",
+            "name": "Incoming Material Quality"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 60
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "158468ad-6411-44ef-900f-674e366057b9"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "value": 85,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "70400fd8-b5d2-4c7b-81be-eae3cca9b4ea",
+            "name": "Process Environment Conditions"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 180
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "6e3829db-9e20-4440-bd50-a323bc7e7c05"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "value": 80,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "0a2fde55-e4f0-4116-93ad-9e3e14c52b88",
+            "name": "Customer Specification Tolerance"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 300
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "605e0a34-240f-4b7a-8576-1ee04fdf893e"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "value": 75,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "3d447e95-fdbc-4632-bc34-527a4dc50dd7",
+            "name": "Supplier Consistency"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 420
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "83941580-dc0e-4615-bf01-8cda3f75f879"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "value": 78,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "b1b428cc-f6af-4130-9f13-415bcd60c52b",
+            "name": "Regulatory Quality Standards"
+          },
+          "causalType": "External",
+          "position": {
+            "x": 340,
+            "y": 540
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "8c3e1286-b463-46ff-be14-c11a0ea34bb6"
+              },
+              "displayType": "controlRange",
+              "content": {
+                "controlParameters": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "value": 90,
+                  "isInteractive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "e744bf3b-afab-4e21-8f27-23fac6d066dd",
+            "name": "Process Capability Index"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 120
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "43f2004c-0313-4fa5-8868-1e4cfd7388d6"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5",
+            "name": "In-Process Defect Rate"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 280
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "d87dfdc0-17fd-4fe1-830b-e2939304fa49"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "2a4d5b9a-3389-42a2-9853-6aca304a5ac6",
+            "name": "Inspection Throughput"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 440
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "278dae2b-4039-4408-8ce6-7c8a5126083d"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "31b9e24f-060f-4773-aa8b-4db5e5eb62b9",
+            "name": "Rework Volume"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 600
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "600c306f-7489-4dfb-9634-fcea4209880d"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "3f778fbe-3079-4f37-a66b-fca1e3d91e26",
+            "name": "Scrap Rate"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 760
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "62f61d68-2c24-404c-ba91-a26f2d0106ac"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "6bcf876b-fd5a-41a2-bff4-47c86e97be52",
+            "name": "First-Pass Yield"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 920
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "541cdc47-e86a-4f53-baa5-3c2ecc3ef9bc"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "20e5dcf7-cef1-4b7f-9b51-963cb0cbe0db",
+            "name": "Corrective Action Lag"
+          },
+          "causalType": "Intermediate",
+          "position": {
+            "x": 640,
+            "y": 1080
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "2605e788-550d-4d78-b0e5-176b6febd14d"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "2dc64b7a-d06e-425b-a640-6c0aeda1521d",
+            "name": "Product Conformance Rate"
+          },
+          "causalType": "Outcome",
+          "position": {
+            "x": 960,
+            "y": 120
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "0cb22adc-21fe-43ec-8566-c38a9af530c3"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "e361b155-4fae-4750-9612-c024bd061609",
+            "name": "Quality Cost per Unit"
+          },
+          "causalType": "Outcome",
+          "position": {
+            "x": 960,
+            "y": 400
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "11a1423d-0093-4a07-8969-1b1d1e8a6d9d"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "497ab9e4-02b5-4508-9349-941a90a4fde9",
+            "name": "Customer Return Rate"
+          },
+          "causalType": "Outcome",
+          "position": {
+            "x": 960,
+            "y": 680
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "ff7cd4d9-9f86-4c30-8e31-4c34e9ebab8c"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "c5564065-6274-4f91-83ea-da62778a941d",
+            "name": "Warranty Liability"
+          },
+          "causalType": "Outcome",
+          "position": {
+            "x": 960,
+            "y": 960
+          },
+          "displays": [
+            {
+              "meta": {
+                "uuid": "26563152-1ba6-453e-b3a2-98649f594d84"
+              },
+              "displayType": "controlText",
+              "content": {
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "meta": {
+            "uuid": "ff2cf19a-b773-4321-80f3-b0271538f535",
+            "name": "Higher inspection intensity applies more check points \u2192 slows throughput"
+          },
+          "source": "897843ed-6c76-461c-bad1-09133ee154b1",
+          "target": "2a4d5b9a-3389-42a2-9853-6aca304a5ac6"
+        },
+        {
+          "meta": {
+            "uuid": "1c891459-1b65-42b5-b924-5b69ffb2c447",
+            "name": "More rigorous inspection catches defects earlier \u2192 protects first-pass yield"
+          },
+          "source": "897843ed-6c76-461c-bad1-09133ee154b1",
+          "target": "6bcf876b-fd5a-41a2-bff4-47c86e97be52"
+        },
+        {
+          "meta": {
+            "uuid": "f7de9ef2-df45-4bdd-9c2e-ae6a2b22f650",
+            "name": "Tighter acceptance thresholds classify more borderline items as defective"
+          },
+          "source": "249aae1a-84ad-497c-afae-efa28244d8e5",
+          "target": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5"
+        },
+        {
+          "meta": {
+            "uuid": "8a0b577b-f016-4370-8ad6-c9949cf9536b",
+            "name": "Stricter thresholds reject more items that cannot be reworked \u2192 raises scrap"
+          },
+          "source": "249aae1a-84ad-497c-afae-efa28244d8e5",
+          "target": "3f778fbe-3079-4f37-a66b-fca1e3d91e26"
+        },
+        {
+          "meta": {
+            "uuid": "95d25cc9-8e8a-4482-9b7e-bf0b39ceea90",
+            "name": "Larger sample sizes pull more units from flow \u2192 reduces inspection throughput"
+          },
+          "source": "87aa9c91-f9ea-4348-a77e-cac9d51e7e25",
+          "target": "2a4d5b9a-3389-42a2-9853-6aca304a5ac6"
+        },
+        {
+          "meta": {
+            "uuid": "8950256d-e8e7-4580-80ab-e15822f5e730",
+            "name": "Broader rework policy routes more defect categories into rework queue"
+          },
+          "source": "45364eef-6cca-4c45-991e-ab6e03035e43",
+          "target": "31b9e24f-060f-4773-aa8b-4db5e5eb62b9"
+        },
+        {
+          "meta": {
+            "uuid": "d0d87291-b250-404e-af0b-e7e7630f69bf",
+            "name": "Tighter SPC limits force earlier corrections \u2192 maintains higher Cpk"
+          },
+          "source": "0d2af1c1-da3d-4cf3-8187-7a450bce4c5e",
+          "target": "e744bf3b-afab-4e21-8f27-23fac6d066dd"
+        },
+        {
+          "meta": {
+            "uuid": "b9958743-fe09-4aa8-a5b0-328ca0559296",
+            "name": "Earlier SPC intervention prevents defect-generating drift from propagating"
+          },
+          "source": "0d2af1c1-da3d-4cf3-8187-7a450bce4c5e",
+          "target": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5"
+        },
+        {
+          "meta": {
+            "uuid": "f15a70cf-4856-425a-a1d9-62344f1928c7",
+            "name": "Faster corrective action speed reduces elapsed time between detection and fix"
+          },
+          "source": "6b3d7e53-b81d-412c-9d14-e0580d785484",
+          "target": "20e5dcf7-cef1-4b7f-9b51-963cb0cbe0db"
+        },
+        {
+          "meta": {
+            "uuid": "58f8ec41-29d6-49e3-b9a4-e9c38d550ff8",
+            "name": "Poor incoming material introduces variance \u2192 degrades process capability"
+          },
+          "source": "5fdcee30-cb6b-413a-842a-578fadc10891",
+          "target": "e744bf3b-afab-4e21-8f27-23fac6d066dd"
+        },
+        {
+          "meta": {
+            "uuid": "d20a1ba7-81cc-4d7e-9636-56871b5efff2",
+            "name": "Substandard inputs directly generate defects regardless of process settings"
+          },
+          "source": "5fdcee30-cb6b-413a-842a-578fadc10891",
+          "target": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5"
+        },
+        {
+          "meta": {
+            "uuid": "f803ee21-2aa5-47bc-a92b-86553cb12b52",
+            "name": "Environmental variation shifts process mean \u2192 inflates variance, reduces Cpk"
+          },
+          "source": "70400fd8-b5d2-4c7b-81be-eae3cca9b4ea",
+          "target": "e744bf3b-afab-4e21-8f27-23fac6d066dd"
+        },
+        {
+          "meta": {
+            "uuid": "23e6ef1a-9f26-45f1-b18e-277b7a12002b",
+            "name": "Environment instability produces off-spec output even at nominal settings"
+          },
+          "source": "70400fd8-b5d2-4c7b-81be-eae3cca9b4ea",
+          "target": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5"
+        },
+        {
+          "meta": {
+            "uuid": "097ade1b-58d9-426e-a9bd-944e31ab8e87",
+            "name": "Tighter customer tolerance reclassifies borderline items \u2192 raises defect rate"
+          },
+          "source": "0a2fde55-e4f0-4116-93ad-9e3e14c52b88",
+          "target": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5"
+        },
+        {
+          "meta": {
+            "uuid": "2599b994-6d55-4b96-ad22-47f2d6a0f1db",
+            "name": "High batch-to-batch supplier variation reduces process capability"
+          },
+          "source": "3d447e95-fdbc-4632-bc34-527a4dc50dd7",
+          "target": "e744bf3b-afab-4e21-8f27-23fac6d066dd"
+        },
+        {
+          "meta": {
+            "uuid": "b6032c2c-35d1-48f8-9af6-a6bf1d5ed589",
+            "name": "Regulatory standards mandate controls that set capability floor"
+          },
+          "source": "b1b428cc-f6af-4130-9f13-415bcd60c52b",
+          "target": "e744bf3b-afab-4e21-8f27-23fac6d066dd"
+        },
+        {
+          "meta": {
+            "uuid": "00219b14-c657-458c-815a-cef11c08e4d4",
+            "name": "Narrower customer tolerance \u2192 more shipped items fall outside acceptance"
+          },
+          "source": "0a2fde55-e4f0-4116-93ad-9e3e14c52b88",
+          "target": "497ab9e4-02b5-4508-9349-941a90a4fde9"
+        },
+        {
+          "meta": {
+            "uuid": "381c8219-3c0e-43c5-95af-e8a49a340cb1",
+            "name": "Tighter specs increase probability of latent failures within warranty window"
+          },
+          "source": "0a2fde55-e4f0-4116-93ad-9e3e14c52b88",
+          "target": "c5564065-6274-4f91-83ea-da62778a941d"
+        },
+        {
+          "meta": {
+            "uuid": "af4ca4fb-65a5-4f90-8311-d20505583934",
+            "name": "Lower process capability directly produces more out-of-spec units"
+          },
+          "source": "e744bf3b-afab-4e21-8f27-23fac6d066dd",
+          "target": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5"
+        },
+        {
+          "meta": {
+            "uuid": "378ab018-4114-4585-848d-62526c0f767d",
+            "name": "Higher defect rate produces more items needing rework before proceeding"
+          },
+          "source": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5",
+          "target": "31b9e24f-060f-4773-aa8b-4db5e5eb62b9"
+        },
+        {
+          "meta": {
+            "uuid": "76b125b0-c3f0-4c16-98d5-e3505862752b",
+            "name": "A portion of defective items cannot be reworked \u2192 scrap is a direct function"
+          },
+          "source": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5",
+          "target": "3f778fbe-3079-4f37-a66b-fca1e3d91e26"
+        },
+        {
+          "meta": {
+            "uuid": "6a38166c-195c-4c7a-87ec-92aff7577c0b",
+            "name": "Higher defect rate reduces fraction passing inspection without rework"
+          },
+          "source": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5",
+          "target": "6bcf876b-fd5a-41a2-bff4-47c86e97be52"
+        },
+        {
+          "meta": {
+            "uuid": "6d939ae6-e7f6-4201-a109-1283ae6f4a0e",
+            "name": "Reworked items re-enter process and can generate secondary defects"
+          },
+          "source": "31b9e24f-060f-4773-aa8b-4db5e5eb62b9",
+          "target": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5"
+        },
+        {
+          "meta": {
+            "uuid": "792801a0-2bc0-4087-afc2-328afc35d5ef",
+            "name": "Low first-pass yield signals systemic problems perpetuating high defect rate"
+          },
+          "source": "6bcf876b-fd5a-41a2-bff4-47c86e97be52",
+          "target": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5"
+        },
+        {
+          "meta": {
+            "uuid": "a9267699-627a-441f-8330-36b51f2a7982",
+            "name": "Long corrective action lag allows root causes to keep generating defects"
+          },
+          "source": "20e5dcf7-cef1-4b7f-9b51-963cb0cbe0db",
+          "target": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5"
+        },
+        {
+          "meta": {
+            "uuid": "6d786610-5240-4892-a1af-10bdad6a2e45",
+            "name": "First-pass yield is the primary determinant of conforming output fraction"
+          },
+          "source": "6bcf876b-fd5a-41a2-bff4-47c86e97be52",
+          "target": "2dc64b7a-d06e-425b-a640-6c0aeda1521d"
+        },
+        {
+          "meta": {
+            "uuid": "ee98becb-d873-447b-b3cf-68157a0f11b1",
+            "name": "Higher defect rate reduces volume of conforming output per period"
+          },
+          "source": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5",
+          "target": "2dc64b7a-d06e-425b-a640-6c0aeda1521d"
+        },
+        {
+          "meta": {
+            "uuid": "a4077f31-ae41-4a2b-99c0-28c12a379ba7",
+            "name": "Scrap is a total cost write-off \u2192 each scrapped unit adds full production cost"
+          },
+          "source": "3f778fbe-3079-4f37-a66b-fca1e3d91e26",
+          "target": "e361b155-4fae-4750-9612-c024bd061609"
+        },
+        {
+          "meta": {
+            "uuid": "b8ced55b-d862-4017-81f6-9edcb6699ca1",
+            "name": "Rework consumes additional labour, machine time, and materials"
+          },
+          "source": "31b9e24f-060f-4773-aa8b-4db5e5eb62b9",
+          "target": "e361b155-4fae-4750-9612-c024bd061609"
+        },
+        {
+          "meta": {
+            "uuid": "d522db82-e254-442c-a1ad-130a0612f619",
+            "name": "Inspection throughput determines labour and equipment cost per unit inspected"
+          },
+          "source": "2a4d5b9a-3389-42a2-9853-6aca304a5ac6",
+          "target": "e361b155-4fae-4750-9612-c024bd061609"
+        },
+        {
+          "meta": {
+            "uuid": "a282e702-11dc-4ac4-b5e5-62594e311bb5",
+            "name": "Low first-pass yield means more shipped units carry latent defects"
+          },
+          "source": "6bcf876b-fd5a-41a2-bff4-47c86e97be52",
+          "target": "497ab9e4-02b5-4508-9349-941a90a4fde9"
+        },
+        {
+          "meta": {
+            "uuid": "ecbe30ec-c59b-4888-b546-0a3d687bb219",
+            "name": "Low process capability generates systematic off-spec output that fails in use"
+          },
+          "source": "e744bf3b-afab-4e21-8f27-23fac6d066dd",
+          "target": "497ab9e4-02b5-4508-9349-941a90a4fde9"
+        },
+        {
+          "meta": {
+            "uuid": "0b035941-1bb8-48c0-9df1-53f8cbe1c97e",
+            "name": "Units shipped with undetected defects are the primary source of warranty claims"
+          },
+          "source": "b06b995c-9a1f-48e1-9817-fa8f36d9d0e5",
+          "target": "c5564065-6274-4f91-83ea-da62778a941d"
+        },
+        {
+          "meta": {
+            "uuid": "52e8a013-2da1-48d8-b8c6-58a3076620ae",
+            "name": "High scrap signals defective output at scale \u2192 some defects escape to field"
+          },
+          "source": "3f778fbe-3079-4f37-a66b-fca1e3d91e26",
+          "target": "c5564065-6274-4f91-83ea-da62778a941d"
+        },
+        {
+          "meta": {
+            "uuid": "84c249ef-7cf6-4c18-a6d2-41d721429854",
+            "name": "Faster corrective action resolves root causes sooner \u2192 protects conformance rate"
+          },
+          "source": "6b3d7e53-b81d-412c-9d14-e0580d785484",
+          "target": "2dc64b7a-d06e-425b-a640-6c0aeda1521d"
+        }
+      ]
+    }
+  ]
+}
