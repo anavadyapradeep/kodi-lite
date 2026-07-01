@@ -1,130 +1,98 @@
 {
-  "$schema": "./schemas/Causal-Decision-Model.json",
+  "$schema": "https://opendi.org/json-schema/v0-draft-0325/Causal-Decision-Model.json",
   "meta": {
-    "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567801",
+    "uuid": "aa277f37-1ebf-44ff-986a-6d9080b8ead2",
     "name": "SKEL-01: Production Planning",
-    "summary": "Canonical manufacturing skeleton for production planning decisions. Captures what to produce, in what volume and mix, across which lines and shifts, and in what batch sequence. Actions flow through capacity and inventory intermediates to drive fulfillment, cost, delivery, and margin outcomes. This skeleton is parameterised: node names and structure remain constant across customers; values, ranges, and specific thresholds are filled in during customer instantiation.",
+    "summary": "Canonical manufacturing skeleton for production planning decisions. Captures what to produce, in what volume and mix, across which lines and shifts, and in what batch sequence. Five Action (Lever) nodes feed four Intermediate nodes which drive four Outcome nodes, with four External nodes providing uncontrollable inputs. All 17 variables from the KODI Lite Sprint Brief SKEL-01 specification are present.",
     "documentation": {
-      "content": "KODI Lite Sprint · Skeleton Library · SKEL-01\n\nNode taxonomy:\n  A_ prefix  = Action (Lever)       — controllable decisions Kimaru makes\n  E_ prefix  = External             — uncontrollable observed inputs\n  I_ prefix  = Intermediate         — computed internal states\n  O_ prefix  = Outcome              — final KPI-linked outputs\n\nCausal flow:\n  E nodes feed I nodes (demand/supply signals → system state)\n  A nodes feed I nodes (scheduling decisions → system state)\n  I nodes feed O nodes (system state → business outcomes)\n  A nodes feed O nodes directly where the action has a direct cost impact\n\nAll 17 variables from the Sprint Brief are represented.",
+      "content": "KODI Lite Sprint \u00b7 Skeleton Library \u00b7 SKEL-01\n\nNode taxonomy by causalType:\n  Lever        (5)  \u2014 controllable scheduling decisions\n  External     (4)  \u2014 uncontrollable observed inputs\n  Intermediate (4)  \u2014 computed internal system states\n  Outcome      (4)  \u2014 final KPI-linked outputs\n\nDependency flow:\n  E \u2192 I  (8 edges): market/supply signals shape internal state\n  A \u2192 I  (11 edges): scheduling decisions drive system state\n  I \u2192 O  (8 edges): system state determines business outcomes\n  A \u2192 O  (3 edges): direct cost impact bypassing intermediates\n  E \u2192 O  (1 edge):  direct revenue impact from market conditions\n  O \u2192 O  (2 edges): fulfillment and unit cost cascade into gross margin\n\nTotal: 33 causal dependencies. Zero back-edges (no feedback loops).\n\nSchema compliance: OpenDI v0-draft-0325.\nKODI slot mapping for translation engine:\n  Lever        \u2192 A (Action)\n  External     \u2192 E (External)\n  Intermediate \u2192 I (Intermediate)\n  Outcome      \u2192 O (Outcome)\n",
       "MIMEType": "text/plain"
     },
     "version": "1.0",
     "draft": false,
-    "createdDate": "2026-06-19T09:00:00Z",
-    "tags": ["manufacturing", "production-planning", "skeleton", "kodi-lite", "skel-01"]
+    "createdDate": "2026-06-19T09:00:00Z"
   },
   "diagrams": [
     {
       "meta": {
-        "uuid": "d1a2b3c4-e5f6-7890-abcd-ef1234567801",
-        "name": "SKEL-01 · Production Planning · Causal Map",
+        "uuid": "659d9703-e2e7-45d4-a8b9-48a260d9496a",
+        "name": "SKEL-01 \u00b7 Production Planning \u00b7 Causal Map",
         "createdDate": "2026-06-19T09:00:00Z"
       },
       "elements": [
-
         {
           "meta": {
-            "uuid": "a001-0000-0000-0000-000000000001",
-            "name": "A_production_volume_per_sku",
-            "label": "Production Volume per SKU",
-            "description": "The planned output quantity for each Stock Keeping Unit in the production horizon. Directly drives capacity utilisation and finished goods inventory build.",
-            "kodi_slot": "A"
+            "uuid": "d7c09b8c-1dd9-432c-a8f9-4cbaa0a99f71",
+            "name": "Production Volume per SKU",
+            "summary": "How many units of each Stock Keeping Unit to produce in the planning period. The primary volume decision that sets the scale of the whole production run."
           },
           "causalType": "Lever",
-          "position": { "x": 120, "y": 100 },
+          "position": {
+            "x": 80,
+            "y": 80
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d001-0000-0000-0000-000000000001",
-                "name": "Production Volume per SKU"
+                "uuid": "b6980e78-068f-4aa3-9eb1-0f75b91d5e86"
               },
               "displayType": "controlRange",
               "content": {
                 "controlParameters": {
                   "min": 0,
                   "max": 50000,
-                  "step": 100,
+                  "step": 500,
                   "value": 10000,
-                  "unit": "units/week",
                   "isInteractive": true
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d001-0000-0000-0000-000000000002",
-                "name": "Volume Display"
-              },
-              "displayType": "controlText",
-              "content": {
-                "controlParameters": {
-                  "value": "10000 units/week",
-                  "isInteractive": false
                 }
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "a002-0000-0000-0000-000000000002",
-            "name": "A_production_mix",
-            "label": "Production Mix",
-            "description": "The percentage allocation of available production capacity across the SKU portfolio for the planning period. Affects capacity utilisation efficiency and margin profile.",
-            "kodi_slot": "A"
+            "uuid": "4bda1f04-b9bd-4ce5-b657-ccc4a1a9e18b",
+            "name": "Production Mix",
+            "summary": "The ratio of capacity allocated to each product family or SKU tier. Shifting mix toward higher-margin SKUs directly improves gross margin."
           },
           "causalType": "Lever",
-          "position": { "x": 120, "y": 220 },
+          "position": {
+            "x": 80,
+            "y": 230
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d002-0000-0000-0000-000000000001",
-                "name": "Production Mix — High-Margin SKU Share"
+                "uuid": "03ba0885-2e84-4eee-9c21-09df467816eb"
               },
               "displayType": "controlRange",
               "content": {
                 "controlParameters": {
                   "min": 0,
                   "max": 100,
-                  "step": 1,
+                  "step": 5,
                   "value": 60,
-                  "unit": "% high-margin",
                   "isInteractive": true
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d002-0000-0000-0000-000000000002",
-                "name": "Mix Display"
-              },
-              "displayType": "controlText",
-              "content": {
-                "controlParameters": {
-                  "value": "60% high-margin SKUs",
-                  "isInteractive": false
                 }
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "a003-0000-0000-0000-000000000003",
-            "name": "A_shift_count",
-            "label": "Shift Count",
-            "description": "The number of production shifts run per day across the facility. Controls total available machine-hours and labour availability. Primary lever for short-run capacity adjustment.",
-            "kodi_slot": "A"
+            "uuid": "c0fbe5ef-46d1-400a-941d-ac8bc7ce82c5",
+            "name": "Shift Count",
+            "summary": "Number of production shifts run per day. Each shift adds available machine-hours, expanding capacity but also adding labour cost."
           },
           "causalType": "Lever",
-          "position": { "x": 120, "y": 340 },
+          "position": {
+            "x": 80,
+            "y": 380
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d003-0000-0000-0000-000000000001",
-                "name": "Shift Count"
+                "uuid": "9f820ede-d369-444c-9a63-0fb9daf6eb63"
               },
               "displayType": "controlRange",
               "content": {
@@ -133,86 +101,56 @@
                   "max": 3,
                   "step": 1,
                   "value": 2,
-                  "unit": "shifts/day",
                   "isInteractive": true
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d003-0000-0000-0000-000000000002",
-                "name": "Shift Display"
-              },
-              "displayType": "controlText",
-              "content": {
-                "controlParameters": {
-                  "value": "2 shifts/day",
-                  "isInteractive": false
                 }
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "a004-0000-0000-0000-000000000004",
-            "name": "A_line_allocation",
-            "label": "Line Allocation",
-            "description": "Assignment of SKUs or product families to specific production lines. Determines per-line load balance and influences changeover frequency and overall OEE.",
-            "kodi_slot": "A"
+            "uuid": "0f62fa96-030a-4724-91d4-bd2fe42c9a0b",
+            "name": "Line Allocation",
+            "summary": "Assignment of SKUs to specific production lines. Dedicated allocation reduces changeover; flexible allocation improves resilience to demand mix shifts."
           },
           "causalType": "Lever",
-          "position": { "x": 120, "y": 460 },
+          "position": {
+            "x": 80,
+            "y": 530
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d004-0000-0000-0000-000000000001",
-                "name": "Line Utilisation — Dedicated vs. Flexible"
+                "uuid": "d9b70359-c5ae-4db7-b821-6768bc8a1d1b"
               },
               "displayType": "controlRange",
               "content": {
                 "controlParameters": {
                   "min": 0,
                   "max": 100,
-                  "step": 5,
+                  "step": 10,
                   "value": 70,
-                  "unit": "% dedicated lines",
                   "isInteractive": true
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d004-0000-0000-0000-000000000002",
-                "name": "Line Allocation Display"
-              },
-              "displayType": "controlText",
-              "content": {
-                "controlParameters": {
-                  "value": "70% dedicated / 30% flexible",
-                  "isInteractive": false
                 }
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "a005-0000-0000-0000-000000000005",
-            "name": "A_batch_sequencing",
-            "label": "Batch Sequencing Order",
-            "description": "The ordered sequence in which production batches are scheduled across lines. Minimising changeover cost between batches (e.g. colour, formulation, size) directly reduces non-productive machine time.",
-            "kodi_slot": "A"
+            "uuid": "dca7b10f-a0d6-4c02-b19e-b54a6f5c2792",
+            "name": "Batch Sequencing Order",
+            "summary": "The order in which production batches are run. Optimising sequence to minimise changeover cost between dissimilar batches reduces non-productive machine time."
           },
           "causalType": "Lever",
-          "position": { "x": 120, "y": 580 },
+          "position": {
+            "x": 80,
+            "y": 680
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d005-0000-0000-0000-000000000001",
-                "name": "Batch Changeover Cost Index"
+                "uuid": "ccc1ebcc-70d5-4a7c-a099-ec17191adeff"
               },
               "displayType": "controlRange",
               "content": {
@@ -221,42 +159,27 @@
                   "max": 100,
                   "step": 1,
                   "value": 35,
-                  "unit": "index (0=min changeover, 100=max)",
                   "isInteractive": true
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d005-0000-0000-0000-000000000002",
-                "name": "Sequencing Display"
-              },
-              "displayType": "controlText",
-              "content": {
-                "controlParameters": {
-                  "value": "Changeover index: 35",
-                  "isInteractive": false
                 }
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "e001-0000-0000-0000-000000000001",
-            "name": "E_demand_forecast",
-            "label": "Demand Forecast",
-            "description": "Forward-looking estimate of customer order volume by SKU for the planning horizon. Sourced from sales, ERP, or demand planning system. Primary driver of target production volume.",
-            "kodi_slot": "E"
+            "uuid": "e0685ae5-caa1-4cb2-a786-26622055ff36",
+            "name": "Demand Forecast",
+            "summary": "Forward-looking estimate of customer order volume by SKU for the planning horizon. Sourced from ERP or demand planning system. Sets the required production target."
           },
-          "causalType": "Uncertainty",
-          "position": { "x": 120, "y": 780 },
+          "causalType": "External",
+          "position": {
+            "x": 80,
+            "y": 870
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d006-0000-0000-0000-000000000001",
-                "name": "Forecast Volume (units/week)"
+                "uuid": "a6b25156-b3d2-436f-9012-fb7b6548dde5"
               },
               "displayType": "controlRange",
               "content": {
@@ -265,46 +188,27 @@
                   "max": 100000,
                   "step": 500,
                   "value": 12000,
-                  "unit": "units/week",
-                  "isInteractive": true
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d006-0000-0000-0000-000000000002",
-                "name": "Forecast Accuracy"
-              },
-              "displayType": "controlRange",
-              "content": {
-                "controlParameters": {
-                  "min": 0,
-                  "max": 100,
-                  "step": 1,
-                  "value": 80,
-                  "unit": "% MAPE accuracy",
                   "isInteractive": true
                 }
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "e002-0000-0000-0000-000000000002",
-            "name": "E_raw_material_availability",
-            "label": "Raw Material Availability",
-            "description": "Proportion of required raw materials confirmed available from suppliers for the planning period. Constrains achievable production volume and mix.",
-            "kodi_slot": "E"
+            "uuid": "de6bf483-12ba-41fd-9408-7a6cb3774586",
+            "name": "Raw Material Availability",
+            "summary": "Proportion of BOM requirements confirmed available from suppliers. Material shortages cap achievable volume and stall in-process batches."
           },
-          "causalType": "Uncertainty",
-          "position": { "x": 120, "y": 900 },
+          "causalType": "External",
+          "position": {
+            "x": 80,
+            "y": 1020
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d007-0000-0000-0000-000000000001",
-                "name": "Material Availability Rate"
+                "uuid": "53748621-e1b6-41ba-942a-4806e53d7ee0"
               },
               "displayType": "controlRange",
               "content": {
@@ -313,46 +217,27 @@
                   "max": 100,
                   "step": 1,
                   "value": 90,
-                  "unit": "% of BOM requirements confirmed",
-                  "isInteractive": true
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d007-0000-0000-0000-000000000002",
-                "name": "Supplier Lead Time (days)"
-              },
-              "displayType": "controlRange",
-              "content": {
-                "controlParameters": {
-                  "min": 1,
-                  "max": 90,
-                  "step": 1,
-                  "value": 14,
-                  "unit": "days",
                   "isInteractive": true
                 }
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "e003-0000-0000-0000-000000000003",
-            "name": "E_regulatory_constraints",
-            "label": "Regulatory Constraints",
-            "description": "External compliance requirements that restrict production operations — including environmental permits, safety standards, labour regulations, and certification requirements. Reduces effective capacity and may mandate specific sequencing.",
-            "kodi_slot": "E"
+            "uuid": "d079ff3a-4ff5-4680-82d9-d9c6a7134949",
+            "name": "Regulatory Constraints",
+            "summary": "Compliance requirements that consume capacity: environmental permits, safety shutdowns, and certification mandates reduce effective machine-hours."
           },
-          "causalType": "Uncertainty",
-          "position": { "x": 120, "y": 1020 },
+          "causalType": "External",
+          "position": {
+            "x": 80,
+            "y": 1170
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d008-0000-0000-0000-000000000001",
-                "name": "Regulatory Capacity Reduction"
+                "uuid": "113add42-dcbf-4932-a162-f8ff7c87c5da"
               },
               "displayType": "controlRange",
               "content": {
@@ -361,42 +246,27 @@
                   "max": 30,
                   "step": 1,
                   "value": 5,
-                  "unit": "% capacity lost to compliance",
                   "isInteractive": true
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d008-0000-0000-0000-000000000002",
-                "name": "Regulatory Status"
-              },
-              "displayType": "controlText",
-              "content": {
-                "controlParameters": {
-                  "value": "Compliant — 5% capacity reduction",
-                  "isInteractive": false
                 }
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "e004-0000-0000-0000-000000000004",
-            "name": "E_market_conditions",
-            "label": "Market Conditions",
-            "description": "Broader market forces affecting production strategy — including competitive pricing pressure, input commodity prices, and economic cycle signals. Influences target mix and acceptable cost thresholds.",
-            "kodi_slot": "E"
+            "uuid": "14ab4f5c-45f0-4da2-989e-1d79528f7d10",
+            "name": "Market Conditions",
+            "summary": "Broader market forces including competitor pricing, commodity input costs, and economic cycle signals that affect both demand and acceptable cost thresholds."
           },
-          "causalType": "Uncertainty",
-          "position": { "x": 120, "y": 1140 },
+          "causalType": "External",
+          "position": {
+            "x": 80,
+            "y": 1320
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d009-0000-0000-0000-000000000001",
-                "name": "Market Price Pressure Index"
+                "uuid": "272933f5-f027-447a-ab01-4cb5b1ffb01d"
               },
               "displayType": "controlRange",
               "content": {
@@ -405,752 +275,487 @@
                   "max": 50,
                   "step": 1,
                   "value": 0,
-                  "unit": "index (-50=deflationary, +50=inflationary)",
                   "isInteractive": true
                 }
               }
-            },
-            {
-              "meta": {
-                "uuid": "d009-0000-0000-0000-000000000002",
-                "name": "Market Conditions Summary"
-              },
-              "displayType": "controlText",
-              "content": {
-                "controlParameters": {
-                  "value": "Neutral market conditions",
-                  "isInteractive": false
-                }
-              }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "i001-0000-0000-0000-000000000001",
-            "name": "I_capacity_utilization",
-            "label": "Capacity Utilisation Rate",
-            "description": "Computed ratio of planned production load to total available machine-hours after accounting for shift count, regulatory constraints, and line allocation. High utilisation signals risk of overload; low signals underuse.",
-            "kodi_slot": "I"
+            "uuid": "9b3894a9-aa0f-4214-b075-e0cfb1f931fd",
+            "name": "Capacity Utilisation Rate",
+            "summary": "Ratio of planned production load to total available machine-hours. Over-utilisation signals overload risk; under-utilisation signals idle cost."
           },
           "causalType": "Intermediate",
-          "position": { "x": 580, "y": 200 },
+          "position": {
+            "x": 620,
+            "y": 230
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d010-0000-0000-0000-000000000001",
-                "name": "Capacity Utilisation (%)"
-              },
-              "displayType": "gauge",
-              "content": {
-                "gaugeParameters": {
-                  "min": 0,
-                  "max": 100,
-                  "value": 78,
-                  "unit": "%",
-                  "warningThreshold": 85,
-                  "criticalThreshold": 95,
-                  "isInteractive": false
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d010-0000-0000-0000-000000000002",
-                "name": "Utilisation Status"
+                "uuid": "118b5016-bc62-494f-aa9b-e0845ee69a05"
               },
               "displayType": "controlText",
               "content": {
                 "controlParameters": {
-                  "value": "78% — within normal operating band",
+                  "value": "",
                   "isInteractive": false
                 }
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "i002-0000-0000-0000-000000000002",
-            "name": "I_wip_level",
-            "label": "Work-In-Progress Level",
-            "description": "Total value and volume of goods currently in the production process — started but not yet completed. High WIP signals bottlenecks or batch-size mismatches. Computed from volume, mix, and throughput rates.",
-            "kodi_slot": "I"
+            "uuid": "10ecfc7e-6d6e-4cbb-92dc-b53466e5e1e1",
+            "name": "Work-In-Progress Level",
+            "summary": "Total units currently in production but not yet complete. High WIP signals bottlenecks or batch-size mismatches; inflates holding cost and obscures flow."
           },
           "causalType": "Intermediate",
-          "position": { "x": 580, "y": 420 },
+          "position": {
+            "x": 620,
+            "y": 460
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d011-0000-0000-0000-000000000001",
-                "name": "WIP Volume (units)"
-              },
-              "displayType": "controlRange",
-              "content": {
-                "controlParameters": {
-                  "min": 0,
-                  "max": 20000,
-                  "step": 100,
-                  "value": 3500,
-                  "unit": "units in-process",
-                  "isInteractive": false
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d011-0000-0000-0000-000000000002",
-                "name": "WIP Status"
+                "uuid": "fee15658-7009-4826-ab4a-e493dbac123b"
               },
               "displayType": "controlText",
               "content": {
                 "controlParameters": {
-                  "value": "3,500 units in-process",
+                  "value": "",
                   "isInteractive": false
                 }
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "i003-0000-0000-0000-000000000003",
-            "name": "I_finished_goods_inventory",
-            "label": "Finished Goods Inventory",
-            "description": "Total stock of completed, ready-to-ship units on hand. Derived from production output minus fulfilled orders. A leading signal for both fulfilment risk and working capital exposure.",
-            "kodi_slot": "I"
+            "uuid": "b54a04e6-7cf7-48ff-a667-ce1773ee353d",
+            "name": "Finished Goods Inventory",
+            "summary": "Completed, ready-to-ship stock on hand. Drives immediate fulfillment rate but excess levels inflate working capital and warehousing cost."
           },
           "causalType": "Intermediate",
-          "position": { "x": 580, "y": 640 },
+          "position": {
+            "x": 620,
+            "y": 690
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d012-0000-0000-0000-000000000001",
-                "name": "Finished Goods (units)"
-              },
-              "displayType": "controlRange",
-              "content": {
-                "controlParameters": {
-                  "min": 0,
-                  "max": 100000,
-                  "step": 500,
-                  "value": 8000,
-                  "unit": "units",
-                  "isInteractive": false
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d012-0000-0000-0000-000000000002",
-                "name": "Days of Cover"
+                "uuid": "8fb03703-aa21-4113-b516-1c565923f53a"
               },
               "displayType": "controlText",
               "content": {
                 "controlParameters": {
-                  "value": "8,000 units · ~5 days cover",
+                  "value": "",
                   "isInteractive": false
                 }
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "i004-0000-0000-0000-000000000004",
-            "name": "I_lead_time",
-            "label": "Production Lead Time",
-            "description": "Average elapsed time from order receipt to goods-ready-to-ship. Driven by WIP level, batch sequencing efficiency, and raw material availability. A key determinant of customer-facing delivery performance.",
-            "kodi_slot": "I"
+            "uuid": "e4bca915-4426-4848-bf2d-18ef0c6b2956",
+            "name": "Production Lead Time",
+            "summary": "Average elapsed days from order receipt to goods-ready-to-ship. Determined by WIP queue depth, sequencing efficiency, and material availability."
           },
           "causalType": "Intermediate",
-          "position": { "x": 580, "y": 860 },
+          "position": {
+            "x": 620,
+            "y": 920
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d013-0000-0000-0000-000000000001",
-                "name": "Lead Time (days)"
-              },
-              "displayType": "controlRange",
-              "content": {
-                "controlParameters": {
-                  "min": 1,
-                  "max": 60,
-                  "step": 1,
-                  "value": 7,
-                  "unit": "calendar days",
-                  "isInteractive": false
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d013-0000-0000-0000-000000000002",
-                "name": "Lead Time Status"
+                "uuid": "ddfe4b05-7cf3-44ca-9232-6cdf3ae837b0"
               },
               "displayType": "controlText",
               "content": {
                 "controlParameters": {
-                  "value": "7 days — within SLA",
+                  "value": "",
                   "isInteractive": false
                 }
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "o001-0000-0000-0000-000000000001",
-            "name": "O_fulfillment_rate",
-            "label": "Fulfillment Rate",
-            "description": "Percentage of customer orders fulfilled completely and on time from available finished goods inventory. Primary customer-facing service KPI. Driven by finished goods level relative to demand.",
-            "kodi_slot": "O",
-            "kpi": {
-              "direction": "maximise",
-              "targetValue": 98.5,
-              "unit": "%"
-            }
+            "uuid": "696b45c5-ebdd-489d-ac49-82b3a3aed16e",
+            "name": "Fulfillment Rate",
+            "summary": "Percentage of customer orders fulfilled completely and on time. Primary customer-facing service KPI. Target: maximise above 98.5%."
           },
           "causalType": "Outcome",
-          "position": { "x": 1040, "y": 120 },
+          "position": {
+            "x": 1160,
+            "y": 120
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d014-0000-0000-0000-000000000001",
-                "name": "Fulfillment Rate (%)"
-              },
-              "displayType": "gauge",
-              "content": {
-                "gaugeParameters": {
-                  "min": 0,
-                  "max": 100,
-                  "value": 96.2,
-                  "unit": "%",
-                  "targetValue": 98.5,
-                  "warningThreshold": 95,
-                  "criticalThreshold": 90,
-                  "isInteractive": false
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d014-0000-0000-0000-000000000002",
-                "name": "Fulfillment Trend"
-              },
-              "displayType": "lineChart",
-              "content": {
-                "data": {
-                  "xAxisLabels": ["W-4", "W-3", "W-2", "W-1", "Current"],
-                  "series": [
-                    {
-                      "title": "Fulfillment Rate %",
-                      "values": [97.1, 95.8, 96.4, 95.9, 96.2]
-                    },
-                    {
-                      "title": "Target",
-                      "values": [98.5, 98.5, 98.5, 98.5, 98.5]
-                    }
-                  ]
-                },
-                "minY": 85,
-                "maxY": 100,
-                "stepHeight": 1
-              }
-            }
-          ]
-        },
-
-        {
-          "meta": {
-            "uuid": "o002-0000-0000-0000-000000000002",
-            "name": "O_unit_cost",
-            "label": "Unit Production Cost",
-            "description": "Total cost to produce one unit, including direct materials, direct labour (shift-count dependent), energy, and allocated overhead. Driven by production volume (economies of scale), shift count, mix, and batch changeover efficiency.",
-            "kodi_slot": "O",
-            "kpi": {
-              "direction": "minimise",
-              "targetValue": 24.50,
-              "unit": "USD/unit"
-            }
-          },
-          "causalType": "Outcome",
-          "position": { "x": 1040, "y": 360 },
-          "displays": [
-            {
-              "meta": {
-                "uuid": "d015-0000-0000-0000-000000000001",
-                "name": "Unit Cost (USD)"
-              },
-              "displayType": "controlRange",
-              "content": {
-                "controlParameters": {
-                  "min": 0,
-                  "max": 100,
-                  "step": 0.01,
-                  "value": 26.80,
-                  "unit": "USD/unit",
-                  "isInteractive": false
-                }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d015-0000-0000-0000-000000000002",
-                "name": "Unit Cost vs Target"
+                "uuid": "d0470ddf-b551-49a8-85ef-fca28221aeec"
               },
               "displayType": "controlText",
               "content": {
                 "controlParameters": {
-                  "value": "$26.80/unit (target: $24.50) — 9.4% above target",
+                  "value": "",
                   "isInteractive": false
                 }
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "o003-0000-0000-0000-000000000003",
-            "name": "O_on_time_delivery",
-            "label": "On-Time Delivery Rate",
-            "description": "Percentage of orders delivered to customer on or before the committed date. Determined by production lead time versus order promise date. A key commercial and contractual KPI.",
-            "kodi_slot": "O",
-            "kpi": {
-              "direction": "maximise",
-              "targetValue": 95.0,
-              "unit": "%"
-            }
+            "uuid": "ae427be4-aa93-4366-a1ef-a18daebb890d",
+            "name": "Unit Production Cost",
+            "summary": "Total cost to produce one unit including materials, labour, energy, and overhead. Driven by volume scale, shift premiums, WIP carrying cost, and mix efficiency. Target: minimise."
           },
           "causalType": "Outcome",
-          "position": { "x": 1040, "y": 600 },
+          "position": {
+            "x": 1160,
+            "y": 380
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d016-0000-0000-0000-000000000001",
-                "name": "On-Time Delivery Rate (%)"
+                "uuid": "b0a812dc-5fd1-4462-b736-8b55272fbc49"
               },
-              "displayType": "gauge",
+              "displayType": "controlText",
               "content": {
-                "gaugeParameters": {
-                  "min": 0,
-                  "max": 100,
-                  "value": 91.5,
-                  "unit": "%",
-                  "targetValue": 95.0,
-                  "warningThreshold": 93,
-                  "criticalThreshold": 88,
+                "controlParameters": {
+                  "value": "",
                   "isInteractive": false
                 }
-              }
-            },
-            {
-              "meta": {
-                "uuid": "d016-0000-0000-0000-000000000002",
-                "name": "OTD Trend"
-              },
-              "displayType": "lineChart",
-              "content": {
-                "data": {
-                  "xAxisLabels": ["W-4", "W-3", "W-2", "W-1", "Current"],
-                  "series": [
-                    {
-                      "title": "OTD %",
-                      "values": [93.2, 92.8, 90.1, 91.0, 91.5]
-                    },
-                    {
-                      "title": "Target",
-                      "values": [95.0, 95.0, 95.0, 95.0, 95.0]
-                    }
-                  ]
-                },
-                "minY": 80,
-                "maxY": 100,
-                "stepHeight": 1
               }
             }
           ]
         },
-
         {
           "meta": {
-            "uuid": "o004-0000-0000-0000-000000000004",
-            "name": "O_gross_margin",
-            "label": "Gross Margin",
-            "description": "Revenue minus cost of goods sold, expressed as a percentage of revenue. Influenced by production mix (higher-margin SKU share), unit cost efficiency, and market price conditions. The financial summary outcome of production planning quality.",
-            "kodi_slot": "O",
-            "kpi": {
-              "direction": "maximise",
-              "targetValue": 38.0,
-              "unit": "%"
-            }
+            "uuid": "956d4bc0-e11e-4ae9-934c-72d95d01c2fa",
+            "name": "On-Time Delivery Rate",
+            "summary": "Percentage of orders delivered on or before the committed date. Determined by production lead time vs. order promise window. Target: maximise above 95%."
           },
           "causalType": "Outcome",
-          "position": { "x": 1040, "y": 840 },
+          "position": {
+            "x": 1160,
+            "y": 640
+          },
           "displays": [
             {
               "meta": {
-                "uuid": "d017-0000-0000-0000-000000000001",
-                "name": "Gross Margin (%)"
+                "uuid": "e57bef14-27a1-41c5-9f53-7717a589a446"
               },
-              "displayType": "gauge",
+              "displayType": "controlText",
               "content": {
-                "gaugeParameters": {
-                  "min": 0,
-                  "max": 60,
-                  "value": 34.2,
-                  "unit": "%",
-                  "targetValue": 38.0,
-                  "warningThreshold": 35,
-                  "criticalThreshold": 30,
+                "controlParameters": {
+                  "value": "",
                   "isInteractive": false
                 }
               }
-            },
+            }
+          ]
+        },
+        {
+          "meta": {
+            "uuid": "f398ce52-1dc3-4588-a924-3a531ec3e6d2",
+            "name": "Gross Margin",
+            "summary": "Revenue minus cost of goods sold as a percentage of revenue. The financial summary of planning quality: mix, cost, and fulfillment all flow here. Target: maximise."
+          },
+          "causalType": "Outcome",
+          "position": {
+            "x": 1160,
+            "y": 900
+          },
+          "displays": [
             {
               "meta": {
-                "uuid": "d017-0000-0000-0000-000000000002",
-                "name": "Margin Waterfall"
+                "uuid": "3494c305-2771-42f8-aa97-5f92c3d06037"
               },
-              "displayType": "stackedBarChart",
+              "displayType": "controlText",
               "content": {
-                "data": {
-                  "xAxisLabels": ["Revenue", "Material Cost", "Labour Cost", "Overhead", "Gross Margin"],
-                  "series": [
-                    {
-                      "title": "Current Period",
-                      "values": [100, 42.3, 14.1, 9.4, 34.2]
-                    },
-                    {
-                      "title": "Target",
-                      "values": [100, 40.0, 13.0, 9.0, 38.0]
-                    }
-                  ]
-                },
-                "minY": 0,
-                "maxY": 110,
-                "stepHeight": 10
+                "controlParameters": {
+                  "value": "",
+                  "isInteractive": false
+                }
               }
             }
           ]
         }
-
       ],
-
       "dependencies": [
-
         {
           "meta": {
-            "uuid": "dep-e001-i001",
-            "name": "E_demand_forecast → I_capacity_utilization",
-            "description": "Higher demand forecast drives higher planned production volume, directly increasing required capacity utilisation."
+            "uuid": "b5ba3939-c93e-4fd3-8d18-5484b3b7207d",
+            "name": "Higher demand raises required production load \u2192 capacity utilisation rises"
           },
-          "source": "e001-0000-0000-0000-000000000001",
-          "target": "i001-0000-0000-0000-000000000001"
+          "source": "e0685ae5-caa1-4cb2-a786-26622055ff36",
+          "target": "9b3894a9-aa0f-4214-b075-e0cfb1f931fd"
         },
         {
           "meta": {
-            "uuid": "dep-e001-i003",
-            "name": "E_demand_forecast → I_finished_goods_inventory",
-            "description": "Demand forecast sets the required finished goods buffer. When forecast rises, target inventory level rises."
+            "uuid": "a009e996-88ab-42bc-9b98-6f66492abb3b",
+            "name": "Demand forecast sets the required finished-goods buffer target"
           },
-          "source": "e001-0000-0000-0000-000000000001",
-          "target": "i003-0000-0000-0000-000000000003"
+          "source": "e0685ae5-caa1-4cb2-a786-26622055ff36",
+          "target": "b54a04e6-7cf7-48ff-a667-ce1773ee353d"
         },
         {
           "meta": {
-            "uuid": "dep-e002-i001",
-            "name": "E_raw_material_availability → I_capacity_utilization",
-            "description": "Material shortages cap achievable production volume and reduce effective capacity utilisation regardless of scheduled load."
+            "uuid": "06aafd07-eb8a-48d4-bc50-27501c4f24eb",
+            "name": "Material shortages cap achievable throughput, reducing effective utilisation"
           },
-          "source": "e002-0000-0000-0000-000000000002",
-          "target": "i001-0000-0000-0000-000000000001"
+          "source": "de6bf483-12ba-41fd-9408-7a6cb3774586",
+          "target": "9b3894a9-aa0f-4214-b075-e0cfb1f931fd"
         },
         {
           "meta": {
-            "uuid": "dep-e002-i002",
-            "name": "E_raw_material_availability → I_wip_level",
-            "description": "Material shortages stall in-process batches, accumulating WIP at material-constrained workstations."
+            "uuid": "3368cab5-c4e8-4e0f-86b2-70ba023cf652",
+            "name": "Shortages stall in-process batches, accumulating WIP at constrained workstations"
           },
-          "source": "e002-0000-0000-0000-000000000002",
-          "target": "i002-0000-0000-0000-000000000002"
+          "source": "de6bf483-12ba-41fd-9408-7a6cb3774586",
+          "target": "10ecfc7e-6d6e-4cbb-92dc-b53466e5e1e1"
         },
         {
           "meta": {
-            "uuid": "dep-e002-i004",
-            "name": "E_raw_material_availability → I_lead_time",
-            "description": "Material delays extend production lead time directly — a missing component halts the batch until supply arrives."
+            "uuid": "c79f3351-358d-4f99-923d-5cbb2ee1410e",
+            "name": "A missing material halts the batch until supply arrives, extending lead time"
           },
-          "source": "e002-0000-0000-0000-000000000002",
-          "target": "i004-0000-0000-0000-000000000004"
+          "source": "de6bf483-12ba-41fd-9408-7a6cb3774586",
+          "target": "e4bca915-4426-4848-bf2d-18ef0c6b2956"
         },
         {
           "meta": {
-            "uuid": "dep-e003-i001",
-            "name": "E_regulatory_constraints → I_capacity_utilization",
-            "description": "Compliance requirements (emission limits, safety shutdowns, permit windows) consume capacity hours, reducing effective utilisation ceiling."
+            "uuid": "f14a811c-5a2d-48e6-be27-7cf3fb5b32b4",
+            "name": "Compliance shutdowns and permit windows consume machine-hours, reducing capacity ceiling"
           },
-          "source": "e003-0000-0000-0000-000000000003",
-          "target": "i001-0000-0000-0000-000000000001"
+          "source": "d079ff3a-4ff5-4680-82d9-d9c6a7134949",
+          "target": "9b3894a9-aa0f-4214-b075-e0cfb1f931fd"
         },
         {
           "meta": {
-            "uuid": "dep-e004-i001",
-            "name": "E_market_conditions → I_capacity_utilization",
-            "description": "Market downturns reduce order intake, causing planned load to fall below available capacity — utilisation drops."
+            "uuid": "f5dda1ba-4b93-4a04-8d67-a7818e555032",
+            "name": "Market downturns reduce order intake, causing planned load to fall below available capacity"
           },
-          "source": "e004-0000-0000-0000-000000000004",
-          "target": "i001-0000-0000-0000-000000000001"
+          "source": "14ab4f5c-45f0-4da2-989e-1d79528f7d10",
+          "target": "9b3894a9-aa0f-4214-b075-e0cfb1f931fd"
         },
         {
           "meta": {
-            "uuid": "dep-e004-i003",
-            "name": "E_market_conditions → I_finished_goods_inventory",
-            "description": "Weak market conditions slow order fulfilment, causing finished goods to accumulate. Strong conditions drain them."
+            "uuid": "c2409b68-d3b4-4015-9ffe-f4e58eff8f99",
+            "name": "Weak demand slows order fulfilment, causing finished goods to accumulate"
           },
-          "source": "e004-0000-0000-0000-000000000004",
-          "target": "i003-0000-0000-0000-000000000003"
-        },
-
-        {
-          "meta": {
-            "uuid": "dep-a001-i001",
-            "name": "A_production_volume_per_sku → I_capacity_utilization",
-            "description": "Higher planned production volume directly increases the load on available capacity, raising utilisation rate."
-          },
-          "source": "a001-0000-0000-0000-000000000001",
-          "target": "i001-0000-0000-0000-000000000001"
+          "source": "14ab4f5c-45f0-4da2-989e-1d79528f7d10",
+          "target": "b54a04e6-7cf7-48ff-a667-ce1773ee353d"
         },
         {
           "meta": {
-            "uuid": "dep-a001-i002",
-            "name": "A_production_volume_per_sku → I_wip_level",
-            "description": "Scheduling more volume simultaneously increases in-process inventory as more batches are staged at once."
+            "uuid": "98ec7676-e5d3-4972-819b-c164e0eebaa2",
+            "name": "Higher planned volume increases the load on available capacity"
           },
-          "source": "a001-0000-0000-0000-000000000001",
-          "target": "i002-0000-0000-0000-000000000002"
+          "source": "d7c09b8c-1dd9-432c-a8f9-4cbaa0a99f71",
+          "target": "9b3894a9-aa0f-4214-b075-e0cfb1f931fd"
         },
         {
           "meta": {
-            "uuid": "dep-a001-i003",
-            "name": "A_production_volume_per_sku → I_finished_goods_inventory",
-            "description": "Volume decisions set the production output rate; higher output directly increases finished goods stock when not immediately fulfilled."
+            "uuid": "423b47d9-45cb-4efe-9510-d7e5a4f3719d",
+            "name": "Scheduling more volume simultaneously increases concurrent in-process batches"
           },
-          "source": "a001-0000-0000-0000-000000000001",
-          "target": "i003-0000-0000-0000-000000000003"
+          "source": "d7c09b8c-1dd9-432c-a8f9-4cbaa0a99f71",
+          "target": "10ecfc7e-6d6e-4cbb-92dc-b53466e5e1e1"
         },
         {
           "meta": {
-            "uuid": "dep-a002-i001",
-            "name": "A_production_mix → I_capacity_utilization",
-            "description": "Different SKUs carry different cycle times and changeover requirements. A high-complexity mix raises effective load per unit scheduled."
+            "uuid": "cb675f23-ee68-4c54-8258-0e9db2ab2bf1",
+            "name": "Higher output rate directly builds finished goods stock when not immediately shipped"
           },
-          "source": "a002-0000-0000-0000-000000000002",
-          "target": "i001-0000-0000-0000-000000000001"
+          "source": "d7c09b8c-1dd9-432c-a8f9-4cbaa0a99f71",
+          "target": "b54a04e6-7cf7-48ff-a667-ce1773ee353d"
         },
         {
           "meta": {
-            "uuid": "dep-a002-i002",
-            "name": "A_production_mix → I_wip_level",
-            "description": "Complex or high-variety mixes increase WIP as more concurrent part numbers are staged across the production floor."
+            "uuid": "e5d20f46-138e-4411-9a2f-be72feffb49e",
+            "name": "Complex or high-variety mixes raise effective load per unit due to changeover time"
           },
-          "source": "a002-0000-0000-0000-000000000002",
-          "target": "i002-0000-0000-0000-000000000002"
+          "source": "4bda1f04-b9bd-4ce5-b657-ccc4a1a9e18b",
+          "target": "9b3894a9-aa0f-4214-b075-e0cfb1f931fd"
         },
         {
           "meta": {
-            "uuid": "dep-a003-i001",
-            "name": "A_shift_count → I_capacity_utilization",
-            "description": "Adding shifts expands the total available machine-hours denominator. At constant load, utilisation rate falls. Shift count is the primary short-run lever to change the utilisation operating point."
+            "uuid": "015ed6bd-5ca7-48c1-923c-bd472c5d9d62",
+            "name": "High-variety mixes increase concurrent part numbers staged across the production floor"
           },
-          "source": "a003-0000-0000-0000-000000000003",
-          "target": "i001-0000-0000-0000-000000000001"
+          "source": "4bda1f04-b9bd-4ce5-b657-ccc4a1a9e18b",
+          "target": "10ecfc7e-6d6e-4cbb-92dc-b53466e5e1e1"
         },
         {
           "meta": {
-            "uuid": "dep-a003-i004",
-            "name": "A_shift_count → I_lead_time",
-            "description": "More shifts reduce queue waiting time for work orders, compressing overall production lead time."
+            "uuid": "d51ee4c4-d9b4-4cab-9199-0eee574a8ec8",
+            "name": "More shifts expand total available machine-hours, reducing utilisation rate at constant load"
           },
-          "source": "a003-0000-0000-0000-000000000003",
-          "target": "i004-0000-0000-0000-000000000004"
+          "source": "c0fbe5ef-46d1-400a-941d-ac8bc7ce82c5",
+          "target": "9b3894a9-aa0f-4214-b075-e0cfb1f931fd"
         },
         {
           "meta": {
-            "uuid": "dep-a004-i001",
-            "name": "A_line_allocation → I_capacity_utilization",
-            "description": "Efficient line allocation minimises inter-line transport and setup, improving effective utilisation of committed capacity."
+            "uuid": "1c6e1955-d28c-483d-9cba-78bb78578584",
+            "name": "More shifts reduce queue waiting time for work orders, compressing lead time"
           },
-          "source": "a004-0000-0000-0000-000000000004",
-          "target": "i001-0000-0000-0000-000000000001"
+          "source": "c0fbe5ef-46d1-400a-941d-ac8bc7ce82c5",
+          "target": "e4bca915-4426-4848-bf2d-18ef0c6b2956"
         },
         {
           "meta": {
-            "uuid": "dep-a004-i002",
-            "name": "A_line_allocation → I_wip_level",
-            "description": "Poor line allocation creates cross-line dependencies that stall batches and inflate WIP buffers."
+            "uuid": "034a55d3-bfe6-4254-a9d4-ec8b225523c9",
+            "name": "Efficient allocation minimises inter-line transport and setup, improving effective utilisation"
           },
-          "source": "a004-0000-0000-0000-000000000004",
-          "target": "i002-0000-0000-0000-000000000002"
+          "source": "0f62fa96-030a-4724-91d4-bd2fe42c9a0b",
+          "target": "9b3894a9-aa0f-4214-b075-e0cfb1f931fd"
         },
         {
           "meta": {
-            "uuid": "dep-a005-i002",
-            "name": "A_batch_sequencing → I_wip_level",
-            "description": "Optimal batch sequencing (minimising changeovers between dissimilar batches) reduces non-productive idle time in the WIP queue."
+            "uuid": "60df2a70-64f4-4d13-9f63-03cdb2a86746",
+            "name": "Poor allocation creates cross-line dependencies that stall batches and inflate WIP buffers"
           },
-          "source": "a005-0000-0000-0000-000000000005",
-          "target": "i002-0000-0000-0000-000000000002"
+          "source": "0f62fa96-030a-4724-91d4-bd2fe42c9a0b",
+          "target": "10ecfc7e-6d6e-4cbb-92dc-b53466e5e1e1"
         },
         {
           "meta": {
-            "uuid": "dep-a005-i004",
-            "name": "A_batch_sequencing → I_lead_time",
-            "description": "Better sequencing reduces cumulative changeover time per planning cycle, which directly compresses average production lead time."
+            "uuid": "306117f2-6ba4-4bcb-af24-89ff6a4ee9c0",
+            "name": "Optimal sequencing minimises changeover idle time, reducing WIP queue depth"
           },
-          "source": "a005-0000-0000-0000-000000000005",
-          "target": "i004-0000-0000-0000-000000000004"
-        },
-
-        {
-          "meta": {
-            "uuid": "dep-i001-o001",
-            "name": "I_capacity_utilization → O_fulfillment_rate",
-            "description": "When capacity is over-utilised, the factory cannot meet all orders; fulfillment rate falls. When under-utilised, capacity exists to fulfil all demand."
-          },
-          "source": "i001-0000-0000-0000-000000000001",
-          "target": "o001-0000-0000-0000-000000000001"
+          "source": "dca7b10f-a0d6-4c02-b19e-b54a6f5c2792",
+          "target": "10ecfc7e-6d6e-4cbb-92dc-b53466e5e1e1"
         },
         {
           "meta": {
-            "uuid": "dep-i001-o002",
-            "name": "I_capacity_utilization → O_unit_cost",
-            "description": "Fixed overhead spread across more units at higher utilisation reduces unit cost. Very low utilisation inflates per-unit fixed cost allocation."
+            "uuid": "aceebd3c-0b3b-457a-a19b-7a1c2568aa89",
+            "name": "Better sequencing reduces cumulative changeover time per cycle, compressing lead time"
           },
-          "source": "i001-0000-0000-0000-000000000001",
-          "target": "o002-0000-0000-0000-000000000002"
+          "source": "dca7b10f-a0d6-4c02-b19e-b54a6f5c2792",
+          "target": "e4bca915-4426-4848-bf2d-18ef0c6b2956"
         },
         {
           "meta": {
-            "uuid": "dep-i002-o002",
-            "name": "I_wip_level → O_unit_cost",
-            "description": "High WIP represents cash tied up in in-process inventory and signals inefficiency. Carrying costs and risk of write-down increase effective unit cost."
+            "uuid": "5331b222-7750-47a1-ae64-5fde8c2d2e84",
+            "name": "Over-utilisation means not all orders can be met; utilisation level caps fulfillment"
           },
-          "source": "i002-0000-0000-0000-000000000002",
-          "target": "o002-0000-0000-0000-000000000002"
+          "source": "9b3894a9-aa0f-4214-b075-e0cfb1f931fd",
+          "target": "696b45c5-ebdd-489d-ac49-82b3a3aed16e"
         },
         {
           "meta": {
-            "uuid": "dep-i002-o003",
-            "name": "I_wip_level → O_on_time_delivery",
-            "description": "Elevated WIP signals flow congestion that extends cycle time across all batches, degrading on-time delivery performance."
+            "uuid": "8a7dbbff-83ad-4d2a-aaaf-aeda66e84a15",
+            "name": "Higher utilisation spreads fixed overhead across more units, reducing unit cost"
           },
-          "source": "i002-0000-0000-0000-000000000002",
-          "target": "o003-0000-0000-0000-000000000003"
+          "source": "9b3894a9-aa0f-4214-b075-e0cfb1f931fd",
+          "target": "ae427be4-aa93-4366-a1ef-a18daebb890d"
         },
         {
           "meta": {
-            "uuid": "dep-i003-o001",
-            "name": "I_finished_goods_inventory → O_fulfillment_rate",
-            "description": "Adequate finished goods buffer allows immediate order fulfilment without waiting for production. Directly and strongly determines fulfillment rate."
+            "uuid": "6b51a2d9-306e-4c42-8fb9-c3ffa326594d",
+            "name": "High WIP represents capital tied up in-process; carrying cost and write-down risk raise unit cost"
           },
-          "source": "i003-0000-0000-0000-000000000003",
-          "target": "o001-0000-0000-0000-000000000001"
+          "source": "10ecfc7e-6d6e-4cbb-92dc-b53466e5e1e1",
+          "target": "ae427be4-aa93-4366-a1ef-a18daebb890d"
         },
         {
           "meta": {
-            "uuid": "dep-i003-o002",
-            "name": "I_finished_goods_inventory → O_unit_cost",
-            "description": "Excess finished goods inventory incurs holding costs (warehousing, insurance, obsolescence risk) that increase effective unit cost of goods sold."
+            "uuid": "c523fd51-a01f-4765-8c90-012d3e13794b",
+            "name": "Elevated WIP signals flow congestion that extends cycle time, degrading delivery punctuality"
           },
-          "source": "i003-0000-0000-0000-000000000003",
-          "target": "o002-0000-0000-0000-000000000002"
+          "source": "10ecfc7e-6d6e-4cbb-92dc-b53466e5e1e1",
+          "target": "956d4bc0-e11e-4ae9-934c-72d95d01c2fa"
         },
         {
           "meta": {
-            "uuid": "dep-i004-o003",
-            "name": "I_lead_time → O_on_time_delivery",
-            "description": "Lead time is the primary driver of on-time delivery. When lead time exceeds the customer's order-to-ship window, deliveries become late."
+            "uuid": "0e659ed0-789a-4241-ad39-93841aed3bd2",
+            "name": "Adequate finished goods buffer enables immediate order fulfilment without waiting for production"
           },
-          "source": "i004-0000-0000-0000-000000000004",
-          "target": "o003-0000-0000-0000-000000000003"
+          "source": "b54a04e6-7cf7-48ff-a667-ce1773ee353d",
+          "target": "696b45c5-ebdd-489d-ac49-82b3a3aed16e"
         },
         {
           "meta": {
-            "uuid": "dep-i004-o001",
-            "name": "I_lead_time → O_fulfillment_rate",
-            "description": "Long lead times prevent fulfilment from available production capacity — finished goods are not yet ready when the order window closes."
+            "uuid": "cd980efb-4b2c-4272-95f0-1b082080e453",
+            "name": "Excess inventory incurs holding cost (warehousing, insurance, obsolescence) raising effective COGS"
           },
-          "source": "i004-0000-0000-0000-000000000004",
-          "target": "o001-0000-0000-0000-000000000001"
-        },
-
-        {
-          "meta": {
-            "uuid": "dep-a001-o002",
-            "name": "A_production_volume_per_sku → O_unit_cost",
-            "description": "Direct volume effect on unit cost: higher volume spreads fixed costs (tooling, setup, overhead) across more units, reducing per-unit cost."
-          },
-          "source": "a001-0000-0000-0000-000000000001",
-          "target": "o002-0000-0000-0000-000000000002"
+          "source": "b54a04e6-7cf7-48ff-a667-ce1773ee353d",
+          "target": "ae427be4-aa93-4366-a1ef-a18daebb890d"
         },
         {
           "meta": {
-            "uuid": "dep-a002-o004",
-            "name": "A_production_mix → O_gross_margin",
-            "description": "Shifting mix toward higher-margin SKUs directly improves overall gross margin, independent of cost efficiency."
+            "uuid": "f899c5c8-4a9a-4408-9627-76d5af1c4977",
+            "name": "Lead time is the primary driver of delivery punctuality: when it exceeds the promise window, orders go late"
           },
-          "source": "a002-0000-0000-0000-000000000002",
-          "target": "o004-0000-0000-0000-000000000004"
+          "source": "e4bca915-4426-4848-bf2d-18ef0c6b2956",
+          "target": "956d4bc0-e11e-4ae9-934c-72d95d01c2fa"
         },
         {
           "meta": {
-            "uuid": "dep-a003-o002",
-            "name": "A_shift_count → O_unit_cost",
-            "description": "Each additional shift adds labour premium and energy cost. Beyond a volume threshold, the extra cost per unit from shift premiums can outweigh volume savings."
+            "uuid": "7c0f86ba-3ea5-44b4-b355-15e95bc98afe",
+            "name": "Long lead times prevent fulfilment within the customer order window even when capacity exists"
           },
-          "source": "a003-0000-0000-0000-000000000003",
-          "target": "o002-0000-0000-0000-000000000002"
+          "source": "e4bca915-4426-4848-bf2d-18ef0c6b2956",
+          "target": "696b45c5-ebdd-489d-ac49-82b3a3aed16e"
         },
         {
           "meta": {
-            "uuid": "dep-o001-o004",
-            "name": "O_fulfillment_rate → O_gross_margin",
-            "description": "Unfulfilled orders represent lost revenue. High fulfillment rate protects the revenue numerator of the gross margin calculation."
+            "uuid": "e6ac85ac-18df-423c-b1db-0e6ed9893409",
+            "name": "Higher volume spreads fixed setup and tooling cost across more units (economies of scale)"
           },
-          "source": "o001-0000-0000-0000-000000000001",
-          "target": "o004-0000-0000-0000-000000000004"
+          "source": "d7c09b8c-1dd9-432c-a8f9-4cbaa0a99f71",
+          "target": "ae427be4-aa93-4366-a1ef-a18daebb890d"
         },
         {
           "meta": {
-            "uuid": "dep-o002-o004",
-            "name": "O_unit_cost → O_gross_margin",
-            "description": "Unit cost is the primary component of COGS. Lower unit cost directly expands gross margin at any given selling price."
+            "uuid": "a2cec123-2205-48dc-901d-e630951d1c80",
+            "name": "Shifting mix toward higher-margin SKUs directly improves gross margin independent of cost"
           },
-          "source": "o002-0000-0000-0000-000000000002",
-          "target": "o004-0000-0000-0000-000000000004"
+          "source": "4bda1f04-b9bd-4ce5-b657-ccc4a1a9e18b",
+          "target": "f398ce52-1dc3-4588-a924-3a531ec3e6d2"
         },
         {
           "meta": {
-            "uuid": "dep-e004-o004",
-            "name": "E_market_conditions → O_gross_margin",
-            "description": "Market price pressure directly affects revenue per unit sold. Inflationary conditions can expand margin; deflationary/competitive pressure compresses it."
+            "uuid": "a75f226f-8b4f-46b0-b347-4ba1060c1131",
+            "name": "Each additional shift adds labour premium and energy cost, affecting unit cost directly"
           },
-          "source": "e004-0000-0000-0000-000000000004",
-          "target": "o004-0000-0000-0000-000000000004"
+          "source": "c0fbe5ef-46d1-400a-941d-ac8bc7ce82c5",
+          "target": "ae427be4-aa93-4366-a1ef-a18daebb890d"
+        },
+        {
+          "meta": {
+            "uuid": "6a455a0b-d137-4e35-b97c-f1f59a90eadf",
+            "name": "Market price pressure directly affects revenue per unit: inflation expands margin, competition compresses it"
+          },
+          "source": "14ab4f5c-45f0-4da2-989e-1d79528f7d10",
+          "target": "f398ce52-1dc3-4588-a924-3a531ec3e6d2"
+        },
+        {
+          "meta": {
+            "uuid": "af595336-a21a-4d9a-8ea5-a90a41ae1b22",
+            "name": "Unfulfilled orders are lost revenue; high fulfillment rate protects the gross margin numerator"
+          },
+          "source": "696b45c5-ebdd-489d-ac49-82b3a3aed16e",
+          "target": "f398ce52-1dc3-4588-a924-3a531ec3e6d2"
+        },
+        {
+          "meta": {
+            "uuid": "902e76f1-2e86-448b-85a8-8a82d75e0dfc",
+            "name": "Unit cost is the primary component of COGS; lower cost directly expands gross margin"
+          },
+          "source": "ae427be4-aa93-4366-a1ef-a18daebb890d",
+          "target": "f398ce52-1dc3-4588-a924-3a531ec3e6d2"
         }
       ]
     }
-  ],
-
-  "runnableModels": [],
-  "inputOutputValues": [],
-  "evaluatableAssets": [],
-  "controls": []
+  ]
 }
